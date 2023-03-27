@@ -1,0 +1,103 @@
+.login {
+    display: flex;
+    flex: 1;
+    background-color: white;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.imgContainer {
+    flex: 1;
+    border: 15px solid lightsteelblue;
+}
+
+.img {
+    flex : 1;
+    height: 100%;
+    position: relative;
+}
+
+.form {
+    flex : 1 ;
+    flex-direction: column;
+    background-color: lightsteelblue;
+}
+
+.field {
+    flex: 1;
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+.labeltxt {
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.inputbox {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.forgotPassword {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn {
+    flex : 1;
+    background-color: white;
+    font-size: 25px;
+    font-weight: bolder;
+    margin: 15px;
+    border-radius: 10px;
+}
+
+.submit {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.submit:hover{
+    opacity: 0.5;
+    background-color: black;
+    color: white;
+}
+
+
+@media ( min-width : 700px ) {
+    .login {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        margin-top: 100px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+@media ( min-width : 240px ) and ( max-width : 699px ) {
+    .login {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin-top: 100px;
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-bottom: 100px;
+    }
+}
+
+.errorMessage {
+    text-align: center;
+    color: red;
+    font-weight: bolder;
+    
+}
