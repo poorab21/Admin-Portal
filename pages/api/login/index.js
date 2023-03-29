@@ -21,7 +21,6 @@ export default async function AdminAuth(req,res){
                 }
             ]
         })
-        console.log(result)
         if(result){
             const token = jwt.sign({ name : result.name , email : email , password : password },'secretKey')
             res.json({

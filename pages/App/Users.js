@@ -1,10 +1,10 @@
 import Layout from '../../Component/Layout'
 
-export default function Dashboard(){
+export default function Users(){
     return (
         <Layout>
             <p>
-                Dashboard
+                Users
             </p>
         </Layout>
     )

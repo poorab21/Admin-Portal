@@ -1,10 +1,10 @@
 import Layout from '../../Component/Layout'
 
-export default function Dashboard(){
+export default function ContactUs(){
     return (
         <Layout>
             <p>
-                Dashboard
+                Contact Us
             </p>
         </Layout>
     )

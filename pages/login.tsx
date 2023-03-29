@@ -1,10 +1,12 @@
 import styles from '../styles/Login.module.css'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 export default function Login(){
+    const router = useRouter()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [error,setError] = useState(false)
@@ -13,12 +15,17 @@ export default function Login(){
             email : email ,
             password : password
         })
-        if(response.data.success) { 
+        if(response.data.success) {
+            localStorage.setItem('token',response.data.token)
             setError(false)
-            console.log('Login Successful') 
+            router.replace('/App/Dashboard')
         } 
         else setError(true)
     }
+
+    useEffect(()=>{
+        router.prefetch('/App/Dashboard')
+    },[])
 
     return (
         <>
