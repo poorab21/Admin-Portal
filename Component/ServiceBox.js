@@ -1,0 +1,47 @@
+import Image from "next/image"
+
+export default function ServiceBox(props){
+    const { serviceType , img } = props
+    return (
+        <>
+            <div className = {"container"}>
+                <Image
+                    src={img}
+                    width = {250}
+                    height = {250}
+                    alt = {'Gardening'}
+                />
+                <p className = {"serviceType"}>
+                    {serviceType}
+                </p>
+                <style jsx>
+                {`
+                .container {
+                    border : 3px solid black ; 
+                    display : flex;
+                    border-radius : 10px;
+                    flex-direction : column;
+                    justify-content : center;
+                    margin : 20px;
+                }
+                .serviceType {
+                    display : flex;
+                    font-weight : bold; 
+                    font-style : italic;
+                    margin : 10px;
+                    background-color : cornflowerblue;
+                    border-radius : 10px;
+                    justify-content : center;
+                    border : 1px solid black;
+                    cursor : pointer;
+                }
+                .serviceType:hover{
+                    color : white ;
+                    background-color : black;
+                }
+                `}
+                </style>
+            </div>
+        </>
+    )    
+}
