@@ -1,6 +1,7 @@
 import clientPromise from '../../../lib/mongo/index'
 import { pbkdf2Sync } from 'crypto';
 import jwt from 'jsonwebtoken';
+import { setCookie } from 'cookies-next'
 
 export default async function AdminAuth(req,res){
     if(req.method === 'POST'){
@@ -23,9 +24,14 @@ export default async function AdminAuth(req,res){
         })
         if(result){
             const token = jwt.sign({ name : result.name , email : email , password : password },'secretKey')
+            setCookie('token',token,{
+                req,
+                res,
+                maxAge : 60 * 60 * 24 * 1 ,
+                httpOnly : true
+            })
             res.json({
-                success : true ,
-                token : token
+                success : true
             })
         }
         else res.json({

@@ -16,8 +16,6 @@ export default function Login(){
             password : password
         })
         if(response.data.success) {
-            localStorage.setItem('token',response.data.token)
-            setError(false)
             router.replace('/App/Dashboard')
         } 
         else setError(true)

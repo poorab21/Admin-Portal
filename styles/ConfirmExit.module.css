@@ -1,0 +1,49 @@
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    opacity: 0.8;
+    margin: 10px;
+    background-color: cornflowerblue;
+}
+
+.container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-color: aliceblue;
+}
+
+.heading {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.message { 
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.btn { 
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-style: italic;
+    background-color: white;
+}
+
+.btn:hover {
+    background-color: black;
+    color: white;
+}

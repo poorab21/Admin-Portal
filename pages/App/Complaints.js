@@ -4,7 +4,7 @@ export default function ContactUs(){
     return (
         <Layout>
             <p>
-                Contact Us
+                Complaints
             </p>
         </Layout>
     )

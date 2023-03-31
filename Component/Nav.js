@@ -10,6 +10,7 @@ import { useState } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 export default function Nav(){
     const [collapse,setCollapse] = useState(false)
@@ -36,8 +37,9 @@ export default function Nav(){
         })
     }
  
-    const logout = () => {
-        
+    const logout = async () => {
+        const response = await axios.get('http://localhost:3000/api/logout')
+        if(response.data.success) router.push('/')
     }
 
     return (
@@ -102,12 +104,12 @@ export default function Nav(){
                             </Link>
                         </li>
                         <li className = {styles.item}>
-                            <Link href={'/App/ContactUs'} className = {styles.link}>    
+                            <Link href={'/App/Complaints'} className = {styles.link}>    
                                 <span className = {styles.icon}>
                                     <BiPhoneCall/>
                                 </span>
                                 <span className = {name}>
-                                    Contact Us
+                                    Complaints
                                 </span>
                             </Link>
                         </li>
