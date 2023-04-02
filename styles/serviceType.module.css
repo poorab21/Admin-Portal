@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    overflow: scroll;
+}
+
+.input {
+    border: 3px solid black;
+    margin : 10px;
+    padding : 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modalBtn {
+    justify-content: center;
+    border: 1px solid black;
+    font-style: italic;
+    font-weight: bold;
+    background-color: cornflowerblue;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.modalBtn:hover{
+    background-color: black;
+    color: white;
+}
+
+.addBtn {
+    border: 1px solid black;
+    display: flex;
+    flex: 1;
+    background-color: cornflowerblue;
+    align-self: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.heading {
+    font-size: 30px;
+    font-weight : bolder;
+    font-style: italic;
+    display: flex;
+    flex: 12;
+    justify-content: center;
+
+}
+
+.table {
+    border : 3px solid black;
+    margin: 10px;
+}
+
+.tbHead {
+    border: 3px solid black;
+    padding: 10px;
+    font-style: italic;
+    font-size: 25px;
+    background-color: cornflowerblue;
+}
+
+.tbData {
+    border: 3px solid black;
+    text-align: center;
+    padding : 10px;
+    font-style: italic;
+}
+
+.removeBtn {
+    background-color: red;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.editBtn {
+   border: 1px solid black;
+   padding: 10px;
+   background-color: cornflowerblue; 
+}

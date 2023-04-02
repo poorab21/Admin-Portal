@@ -1,6 +1,6 @@
-import Layout from '../../Component/Layout'
-import styles from '../../styles/Services.module.css'
-import ServiceBox from '../../Component/ServiceBox'
+import Layout from '../../../Component/Layout'
+import styles from '../../../styles/Services.module.css'
+import ServiceBox from '../../../Component/ServiceBox'
 
 export default function Services(){
     return (

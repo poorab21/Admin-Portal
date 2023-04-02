@@ -6,6 +6,7 @@ import { GrTransaction , GrServices } from 'react-icons/gr'
 import { BiPhoneCall } from 'react-icons/bi'
 import { BsFillArrowLeftCircleFill , BsFillArrowRightCircleFill } from 'react-icons/bs'
 import { AiOutlineLogout } from 'react-icons/ai'
+import { MdPending } from 'react-icons/md'
 import { useState } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -80,6 +81,16 @@ export default function Nav(){
                                 </span>
                                 <span className = {name}>
                                     Users
+                                </span>
+                            </Link>
+                        </li>
+                        <li className = {styles.item}>
+                            <Link href={'/App/Pending'} className = {styles.link}>    
+                                <span className = {styles.icon}>
+                                    <MdPending/>
+                                </span>
+                                <span className = {name}>
+                                    Pending
                                 </span>
                             </Link>
                         </li>

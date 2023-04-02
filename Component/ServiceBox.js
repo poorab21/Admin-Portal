@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export default function ServiceBox(props){
     const { serviceType , img } = props
@@ -11,9 +12,11 @@ export default function ServiceBox(props){
                     height = {250}
                     alt = {'Gardening'}
                 />
-                <p className = {"serviceType"}>
-                    {serviceType}
-                </p>
+                <Link href = {`/App/Services/${serviceType}`}>
+                    <p className = {"serviceType"}>
+                        {serviceType}
+                    </p>
+                </Link>
                 <style jsx>
                 {`
                 .container {
