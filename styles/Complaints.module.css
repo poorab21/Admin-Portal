@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    overflow: scroll;
+}
+
+.header {
+    display: flex;
+    margin: 5px;
+}
+
+.userType {
+    font-weight: bold;
+    font-size: 25px;
+    font-style: italic;
+    display: flex;
+    flex: 8;
+    justify-content: center;
+}
+
+.filter {
+    display: flex;
+    flex : 1;
+    border : 1px solid black;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.table {
+    border : 3px solid black;
+    margin: 10px;
+}
+
+.tbHead {
+    border: 3px solid black;
+    padding: 10px;
+    font-style: italic;
+    font-size: 25px;
+    background-color: cornflowerblue;
+}
+
+.tbData {
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    font-style: italic;
+}
