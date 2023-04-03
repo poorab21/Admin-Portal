@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import axios from "axios"
 import Modal from 'react-modal'
 import { useState } from "react"
+import { Atom } from "react-loading-indicators"
 
 export default function serviceType(){
     const [modal,setModal] = useState(false)
@@ -58,7 +59,11 @@ export default function serviceType(){
     }
 
 
-    if(isLoading) return <p>loading...</p>
+    if(isLoading) return (
+        <div className = {styles.spinnerContainer}>
+            <Atom size = {'small'} color={'cornflowerblue'}  />
+        </div>
+    )
     return (
         <>  
             <Layout>

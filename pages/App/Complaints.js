@@ -3,6 +3,7 @@ import Layout from '../../Component/Layout'
 import styles from '../../styles/Complaints.module.css'
 import useSWR from 'swr'
 import axios from 'axios'
+import { Atom } from 'react-loading-indicators'
 
 export default function Complaints(){
     const [userType,setUserType] = useState('Servicemen')
@@ -16,7 +17,11 @@ export default function Complaints(){
         revalidateOnFocus : true
     })
     
-    if(isLoading) return <p>Loading...</p>
+    if(isLoading) return (
+        <div className = {styles.spinnerContainer}>
+            <Atom size = {'small'} color={'cornflowerblue'}  />
+        </div>
+    )
 
     return (
         <Layout>
