@@ -1,0 +1,98 @@
+.container {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.tbData {
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.requestee {
+    border: 1px solid black;
+    display: flex;
+    width: 230px;
+    padding: 10px;
+    align-items: center;
+    justify-content:space-around;
+    background-color: cornflowerblue;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.contactInfo {
+    font-style: italic;
+    text-align: center;
+    font-size: 10px;
+}
+
+.requesteeName {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
+
+.spinnerContainer {
+    width: fit-content;
+    position: absolute;
+    top : 45%;
+    left: 50%;
+}
+
+.viewBtn {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.viewBtn:disabled:hover {
+    background-color: cornflowerblue;
+}
+
+.viewBtn:hover {
+    background-color: black;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.table {
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.tbHead {
+    border: 3px solid black;
+    padding: 10px;
+    font-style: italic;
+    font-size: 25px;
+    background-color: cornflowerblue;
+}
+
+.heading {
+    font-size: 25px;
+    font-weight: bolder;
+    font-style: italic;
+}
+.filter {
+    border : 1px solid black;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
