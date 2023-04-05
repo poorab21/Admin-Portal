@@ -1,0 +1,78 @@
+.container {
+    width: 100%;
+    margin: 10px;
+    flex-direction: column;
+    display: flex;
+    overflow: scroll;
+}
+
+.header {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    background-color: cornflowerblue;
+    font-weight: bolder;
+    font-size: 25px;
+    font-style: italic;
+    flex: 1;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    flex : 17;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.tbData {
+    text-align: center;
+    font-style: italic;
+    padding: 10px;
+}
+
+.tbHead {
+    border: 1px solid black;
+    background-color: cornflowerblue;
+    font-style: italic;
+}
+
+
+.LOWpriority {
+    border: 1px solid black;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    font-weight: bold;
+    background-color: lime;
+}
+
+.MEDIUMpriority{
+    border: 1px solid black;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.HIGHpriority {
+    border: 1px solid black;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    font-weight: bold;
+    background-color: red;
+}
+
+.conditionList {
+    border: 1px solid black;
+    margin-top: 10px;
+    flex: 1;
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Layout from '../../Component/Layout'
-import styles from '../../styles/Transactions.module.css'
+import Layout from '../../../Component/Layout'
+import styles from '../../../styles/Transactions.module.css'
 import { HiInformationCircle } from 'react-icons/hi'
 import useSWR from 'swr'
 import axios from 'axios'
@@ -96,7 +96,15 @@ export default function Transactions(){
                                     </td>
                                     <td className = {styles.tbData}>
                                         <center style = {{ cursor : 'pointer' }}>
-                                            <Link href = {`${status}/${type}/${ status === 'Requested' ? index + 1 : value._id }`}>
+                                            <Link href = {{
+                                                pathname : `Transactions/${status}/${type}/${ status === 'Requested' ? index + 1 : value._id }` ,
+                                                query : { 
+                                                        ...value ,
+                                                        TaskList : JSON.stringify(value.TaskList) ,
+                                                        TOC : JSON.stringify(value.TOC)
+                                                }
+                                                }
+                                            }>
                                                 <HiInformationCircle 
                                                 size = {25} 
                                                 color = {'cornflowerblue'}
