@@ -11,6 +11,7 @@ export default function ServiceBox(props){
                     width = {250}
                     height = {250}
                     alt = {'Gardening'}
+                    priority
                 />
                 <Link href = {`/App/Services/${serviceType}`}>
                     <p className = {"serviceType"}>

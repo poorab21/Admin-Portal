@@ -12,6 +12,7 @@
     text-align: center;
     background-color: cornflowerblue;
     font-weight: bolder;
+    overflow-wrap: break-word;
     font-size: 25px;
     font-style: italic;
     flex: 1;

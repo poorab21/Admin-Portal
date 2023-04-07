@@ -1,15 +1,16 @@
 import clientPromise from '../../../../lib/mongo/index'
 
-export default async function Requested(req,res){
+export default async function InProgress(req,res){
     if(req.method === 'GET'){
         const client = await clientPromise;
         const db = client.db('test')
         const collection = db.collection('contract-transactions')
+        
         const result = await collection.aggregate([
             { $match : {
                 $and : [
                     {
-                        InProgress : false ,
+                        InProgress : true ,
                         completed : false ,
                     }
                 ]
@@ -26,14 +27,6 @@ export default async function Requested(req,res){
                     localField : 'customer' ,
                     foreignField : '_id' ,
                     as : 'customer'
-                }
-            },
-            {
-                $lookup : {
-                    from : 'Service_Provider' ,
-                    localField : 'requestees' ,
-                    foreignField : '_id' ,
-                    as : 'requestees'
                 }
             }
         ]).toArray()

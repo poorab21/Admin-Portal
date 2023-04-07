@@ -55,27 +55,24 @@ export default function Complaints(){
                         {
                             data && data.map((value,index)=>{
                                 return (
-                                    <>
-                                        <tr key={index}>
-                                            <td className = {styles.tbData}>
-                                                { index + 1 }
-                                            </td>
-                                            <td className = {styles.tbData}>
-                                                { value.email }
-                                            </td>
-                                            <td className = {styles.tbData}>
-                                                {
-                                                    (new Date(value.submission)).getDate() + '/' +
-                                                    Number((new Date(value.submission)).getMonth()+1) + '/' +
-                                                    (new Date(value.submission)).getFullYear()
-                                                
-                                                }
-                                            </td>
-                                            <td className = {styles.tbData}>
-                                                {value.person}
-                                            </td>
-                                        </tr>
-                                    </>
+                                    <tr key={index}>
+                                        <td className = {styles.tbData}>
+                                            { index + 1 }
+                                        </td>
+                                        <td className = {styles.tbData}>
+                                            { value.email }
+                                        </td>
+                                        <td className = {styles.tbData}>
+                                            {
+                                                (new Date(value.submission)).getDate() + '/' +
+                                                Number((new Date(value.submission)).getMonth()+1) + '/' +
+                                                (new Date(value.submission)).getFullYear()
+                                            }
+                                        </td>
+                                        <td className = {styles.tbData}>
+                                            {value.person}
+                                        </td>
+                                    </tr>
                                 )
                             })
                         }

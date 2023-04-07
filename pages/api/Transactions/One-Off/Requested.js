@@ -4,7 +4,7 @@ export default async function Requested(req,res){
     if(req.method === 'GET'){
         const client = await clientPromise;
         const db = client.db('test')
-        const collection = db.collection('contract-transactions')
+        const collection = db.collection('one-off transactions')
         const result = await collection.aggregate([
             { $match : {
                 $and : [
@@ -37,7 +37,6 @@ export default async function Requested(req,res){
                 }
             }
         ]).toArray()
-        
 
         res.json({
             success : true ,
