@@ -1,0 +1,182 @@
+.container {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    margin: 0px;
+    flex: 1;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.header {
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.heading {
+    font-size: 25px;
+    font-weight: bolder;
+    font-style: italic;
+    text-align: center;
+}
+
+.body {
+    flex: 1;
+    overflow: auto;
+}
+
+.applicants {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.tbHead {
+    border: 1px solid black;
+    font-size: xx-small;
+    padding : 10px;
+    background-color: cornflowerblue;
+    font-style: italic;
+}
+
+.tbData {
+    text-align: center;
+    padding: 10px;
+    font-size: xx-small;
+    font-style: italic;
+}
+
+.submittedBtn {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: cornflowerblue;
+    font-weight: bold;
+    font-size: xx-small;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.modal {
+    height: 150px;
+    width: fit-content;
+    overflow: auto;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.submittedBtn:hover {
+    background-color: black;
+    color: white;
+}
+
+.refRow {
+    border: 1px solid black;
+}
+
+@media (min-width : 520px) {
+    .tbHead {
+        border: 1px solid black;
+        font-size: x-small;
+        padding : 10px;
+        background-color: cornflowerblue;
+        font-style: italic;
+    }
+    .tbData {
+        text-align: center;
+        padding: 10px;
+        font-size: x-small;
+        font-style: italic;
+    }
+    .submittedBtn {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: cornflowerblue;
+        font-weight: bold;
+        font-size: x-small;
+        font-style: italic;
+        cursor: pointer;
+    }
+}
+
+
+@media (min-width : 580px) {
+    .tbHead {
+        border: 1px solid black;
+        font-size: small;
+        padding : 10px;
+        background-color: cornflowerblue;
+        font-style: italic;
+    }
+    .tbData {
+        text-align: center;
+        padding: 10px;
+        font-size: x-small;
+        font-style: italic;
+    }
+    .submittedBtn {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: cornflowerblue;
+        font-weight: bold;
+        font-size: small;
+        font-style: italic;
+        cursor: pointer;
+    }
+}
+
+
+@media (min-width : 680px) {
+    .tbHead {
+        border: 1px solid black;
+        font-size: medium;
+        padding : 10px;
+        background-color: cornflowerblue;
+        font-style: italic;
+    }
+    .tbData {
+        text-align: center;
+        padding: 10px;
+        font-size: small;
+        font-style: italic;
+    }
+    
+    .submittedBtn {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: cornflowerblue;
+        font-weight: bold;
+        font-size: small;
+        font-style: italic;
+        cursor: pointer;
+    }
+}
+
+@media (min-width : 768px) {
+    .tbHead {
+        border: 1px solid black;
+        font-size: large;
+        padding : 10px;
+        background-color: cornflowerblue;
+        font-style: italic;
+    }
+    .tbData {
+        text-align: center;
+        padding: 10px;
+        font-size: medium;
+        font-style: italic;
+    }
+    .submittedBtn {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: cornflowerblue;
+        font-weight: bold;
+        font-size: medium;
+        font-style: italic;
+        cursor: pointer;
+    }
+}

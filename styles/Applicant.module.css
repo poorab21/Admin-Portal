@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    margin: 0px;
+    flex: 1;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.header {
+    background-color: cornflowerblue;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: center;
+    flex: 1;
+}
+
+.applicantName {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+    font-style: italic;
+}
+
+.applicant {
+    display: flex;
+    flex: 5;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.application {
+    flex: 11;
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    border: 3px solid black;
+    margin: 10px;
+    flex : 1;
+    border-radius : 10px;
+}
+.heading {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+    font-style: italic;
+}
+.value {
+    text-align: center;
+    margin: 10px;
+    font-style: italic;
+}
+
+@media (min-width : 600px) {
+    .application {
+        flex: 11;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
