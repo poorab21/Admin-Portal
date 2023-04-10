@@ -87,6 +87,13 @@ body {
   overflow-x: hidden;
 }
 
+.spinnerContainer {
+  width: fit-content;
+  position: absolute;
+  top : 45%;
+  left: 50%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
