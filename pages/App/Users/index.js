@@ -1,4 +1,4 @@
-import Layout from '../../Component/Layout'
+import Layout from '../../../Component/Layout'
 
 export default function Users(){
     return (

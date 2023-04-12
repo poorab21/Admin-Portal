@@ -8,7 +8,7 @@ import { Atom } from 'react-loading-indicators'
 export default function Complaints(){
     const [userType,setUserType] = useState('Servicemen')
 
-    const fetcher = async (...args) => {
+    const fetcher = async () => {
         const response = await axios.get(`http://localhost:3000/api/grievances/${userType}`)
         if(response.data.success) return response.data.grievances;
     }
@@ -30,7 +30,7 @@ export default function Complaints(){
                     <p className = {styles.userType}>
                         {userType}
                     </p>
-                    <select className = {styles.filter} onChange = {(e) => setUserType(e.target.value)}>
+                    <select className = {styles.filter} value={userType} onChange = {(e) => setUserType(e.target.value)}>
                         <option>Servicemen</option>
                         <option>Seeker</option>
                     </select>
