@@ -1,29 +1,32 @@
 .container {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex: 1;
     margin: 10px;
     padding: 10px;
-    overflow: scroll;
+    overflow: auto;
+    flex-direction: column;
 }
 
 .header {
+    flex : 1;
     display: flex;
-    margin: 5px;
+    flex-direction: row;
+    padding: 10px;
 }
 
-.userType {
-    font-weight: bold;
+.body {
+    flex: 18;
+}
+
+.heading {
+    flex: 1;
     font-size: xx-large;
+    font-weight: bolder;
     font-style: italic;
-    display: flex;
-    flex: 8;
-    justify-content: center;
+    text-align: center;
 }
 
 .filter {
-    display: flex;
-    flex : 1;
     border : 1px solid black;
     border-radius: 10px;
     background-color: cornflowerblue;
@@ -32,16 +35,10 @@
     cursor: pointer;
 }
 
-.spinnerContainer {
-    width: fit-content;
-    position: absolute;
-    top : 45%;
-    left: 50%;
-}
-
 .table {
     border : 3px solid black;
     margin: 10px;
+    width: 98%;
 }
 
 .tbHead {
@@ -59,51 +56,69 @@
     font-style: italic;
 }
 
-@media screen and (min-width : 320px) {
+.statusBtn {
+    border : 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: cornflowerblue;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.statusBtn:hover{
+    background-color: black;
+    color: white;
+}
+
+@media Screen and (min-width : 150px) {
     .tbHead {
         font-size: small;
     }
-    .userType {
-        font-size: medium;
-    }
+    
     .tbData {
         font-size: x-small;
     }
+    .heading {
+        font-size: medium;
+    }
 }
 
-@media screen and (min-width : 500px) {
+@media Screen and (min-width : 570px) {
     .tbHead {
         font-size: medium;
     }
-    .userType {
-        font-size: large;
-    }
+    
     .tbData {
         font-size: small;
     }
+    .heading {
+        font-size: large;
+    }
 }
 
-
-@media screen and (min-width : 600px) {
+@media Screen and (min-width : 650px) {
     .tbHead {
         font-size: large;
     }
-    .userType {
-        font-size: x-large;
-    }
+    
     .tbData {
         font-size: medium;
     }
+    .heading {
+        font-size: x-large;
+    }
 }
 
-@media screen and (min-width : 992px) {
+
+@media Screen and (min-width : 992px) {
     .tbHead {
         font-size: x-large;
     }
-    .userType {
-        font-size: xx-large;
-    }
+    
     .tbData {
         font-size: large;
+    }
+    .heading {
+        font-size: xx-large;
     }
 }

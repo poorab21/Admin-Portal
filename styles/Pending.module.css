@@ -15,7 +15,7 @@
 }
 
 .heading {
-    font-size: 25px;
+    font-size: small;
     font-weight: bolder;
     font-style: italic;
     text-align: center;
@@ -88,6 +88,9 @@
         font-size: x-small;
         font-style: italic;
     }
+    .heading {
+        font-size: small;
+    }
     .submittedBtn {
         padding: 10px;
         border: 1px solid black;
@@ -114,6 +117,9 @@
         padding: 10px;
         font-size: x-small;
         font-style: italic;
+    }
+    .heading {
+        font-size: medium;
     }
     .submittedBtn {
         padding: 10px;
@@ -142,7 +148,9 @@
         font-size: small;
         font-style: italic;
     }
-    
+    .heading {
+        font-size: large;
+    }
     .submittedBtn {
         padding: 10px;
         border: 1px solid black;
@@ -168,6 +176,9 @@
         padding: 10px;
         font-size: medium;
         font-style: italic;
+    }
+    .heading {
+        font-size: x-large;
     }
     .submittedBtn {
         padding: 10px;

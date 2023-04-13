@@ -55,13 +55,12 @@
 }
 
 .heading {
-    font-size: 30px;
+    font-size: xx-large;
     font-weight : bolder;
     font-style: italic;
     display: flex;
     flex: 12;
     justify-content: center;
-
 }
 
 .table {
@@ -73,7 +72,7 @@
     border: 3px solid black;
     padding: 10px;
     font-style: italic;
-    font-size: 25px;
+    font-size: x-large;
     background-color: cornflowerblue;
 }
 
@@ -81,6 +80,7 @@
     border: 3px solid black;
     text-align: center;
     padding : 10px;
+    font-size: large;
     font-style: italic;
 }
 
@@ -94,4 +94,53 @@
    border: 1px solid black;
    padding: 10px;
    background-color: cornflowerblue; 
+}
+
+@media screen and (min-width : 320px) {
+    .tbHead {
+        font-size: small;
+    }
+    .heading {
+        font-size: medium;
+    }
+    .tbData {
+        font-size: x-small;
+    }
+}
+
+@media screen and (min-width : 500px) {
+    .tbHead {
+        font-size: medium;
+    }
+    .heading {
+        font-size: large;
+    }
+    .tbData {
+        font-size: small;
+    }
+}
+
+
+@media screen and (min-width : 600px) {
+    .tbHead {
+        font-size: large;
+    }
+    .heading {
+        font-size: x-large;
+    }
+    .tbData {
+        font-size: medium;
+    }
+}
+
+@media screen and (min-width : 992px) {
+    .tbHead {
+        font-size: x-large;
+    }
+    .heading {
+        font-size: xx-large;
+    }
+    .tbData {
+        font-size: large;
+    }
 }

@@ -13,7 +13,7 @@ export default function Complaints(){
         if(response.data.success) return response.data.grievances;
     }
 
-    const { data , error , isLoading } = useSWR(`http://localhost:3000/api/grievances/${userType}`,fetcher,{
+    const { data , isLoading } = useSWR(`http://localhost:3000/api/grievances/${userType}`,fetcher,{
         revalidateOnFocus : true
     })
     
