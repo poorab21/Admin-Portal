@@ -19,35 +19,35 @@ export default function servicemen(){
                     </div>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>First Name</legend>
-                        <p className = {styles.value}>Poorab</p>
+                        <p className = {styles.value}>{router.query.firstname}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Last Name</legend>
-                        <p className = {styles.value}>Gangwani</p>
+                        <p className = {styles.value}>{router.query.lastname}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>CNIC</legend>
-                        <p className = {styles.value}>11111-1111111-1</p>
+                        <p className = {styles.value}>{router.query.cnic}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Contact</legend>
-                        <p className = {styles.value}>03350298574</p>
+                        <p className = {styles.value}>{router.query.contact}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Work Experience</legend>
-                        <p className = {styles.value}>5 Year/s</p>
+                        <p className = {styles.value}>{`${router.query.experience} Year/s`}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Service Type</legend>
-                        <p className = {styles.value}>Cleaner</p>
+                        <p className = {styles.value}>{router.query.serviceType}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Email Address</legend>
-                        <p className = {styles.value}>poorabgangwani19@gmail.com</p>
+                        <p className = {styles.value}>{router.query.email}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Date of Registration</legend>
-                        <p className = {styles.value}>Date Value</p>
+                        <p className = {styles.value}>{router.query.registration_date}</p>
                     </fieldset>
                 </div>
             </div>

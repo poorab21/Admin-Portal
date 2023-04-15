@@ -2,9 +2,34 @@ import { useState } from 'react'
 import Layout from '../../../Component/Layout'
 import styles from '../../../styles/Users.module.css'
 import { AiFillInfoCircle } from 'react-icons/ai'
+import useSWR from 'swr'
+import axios from 'axios'
+import Link from 'next/link'
 
 export default function Users(){
     const [userType,setUserType] = useState('Servicemen')
+
+    const fetcher = async (...args) => {
+        const response = await axios.get(args)
+        if(response.data.success) return response.data.servicemen
+    }
+
+    const { data , isLoading , mutate } = useSWR('http://localhost:3000/api/servicemen',fetcher)
+    
+    const getDate = (value) => {
+        const date = new Date(value)
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    }
+
+    const changeStatus = async (id,status) => {
+        const response = await axios.post('http://localhost:3000/api/servicemen/status',{
+            id : id ,
+            status : status
+        })
+        if(response.data.success) mutate()
+        else console.log('Error in status update')
+    }
+
     return (
         <Layout>
             <div className = {styles.container}>
@@ -26,52 +51,43 @@ export default function Users(){
                                 <th className = {styles.tbHead}>Profile</th>
                                 <th className = {styles.tbHead}>status</th>
                             </tr>
-                            <tr>
-                                <td className = {styles.tbData}>jdkjasdnvdvnsdjv</td>
-                                <td className = {styles.tbData}>Poorab Gangwani</td>
-                                <td className = {styles.tbData}>1/11/2023</td>
-                                <td className = {styles.tbData}>
-                                    <center>
-                                        <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
-                                    </center>
-                                </td>
-                                <td className = {styles.tbData}>
-                                    <button className = {styles.statusBtn}>
-                                        Status
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className = {styles.tbData}>jdkjasdnvdvnsdjv</td>
-                                <td className = {styles.tbData}>Poorab Gangwani</td>
-                                <td className = {styles.tbData}>1/11/2023</td>
-                                <td className = {styles.tbData}>
-                                    <center>
-                                        <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
-                                    </center>
-                                </td>
-                                <td className = {styles.tbData}>
-                                    <button className = {styles.statusBtn}>
-                                        Status
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className = {styles.tbData}>jdkjasdnvdvnsdjv</td>
-                                <td className = {styles.tbData}>Poorab Gangwani</td>
-                                <td className = {styles.tbData}>1/11/2023</td>
-                                <td className = {styles.tbData}>
-                                    <center>
-                                        <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
-                                    </center>
-                                </td>
-                                <td className = {styles.tbData}>
-                                    <button className = {styles.statusBtn}>
-                                        Status
-                                    </button>
-                                </td>
-                            </tr>
-                            
+                            {
+                                data && data.map((value,index)=>{
+                                    return (
+                                        <tr key={index}>
+                                            <td className = {styles.tbData}>{value._id}</td>
+                                            <td className = {styles.tbData}>{`${value.firstname} ${value.lastname}`}</td>
+                                            <td className = {styles.tbData}>{`${getDate(value.registration_date)}`}</td>
+                                            <td className = {styles.tbData}>
+                                                <center>
+                                                    <Link href={{
+                                                        pathname : `Users/Servicemen/${value._id}` ,
+                                                        query : {
+                                                            firstname : value.firstname ,
+                                                            lastname : value.lastname ,
+                                                            cnic : value.cnic ,
+                                                            experience : value.experience ,
+                                                            contact : value.contact ,
+                                                            email : value.email ,
+                                                            serviceType : value.serviceType ,
+                                                            registration_date : `${getDate(value.registration_date)}`
+                                                        }
+                                                    }}>
+                                                        <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
+                                                    </Link>
+                                                </center>
+                                            </td>
+                                            <td className = {styles.tbData}>
+                                                <button 
+                                                onClick = {() => changeStatus(value._id,!value.blocked)}
+                                                className = {styles.statusBtn}>
+                                                    { value.blocked ? 'UnBlock' : 'Block' }
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })    
+                            }
                         </tbody>
                     </table>
                 </div>

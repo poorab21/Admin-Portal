@@ -15,7 +15,7 @@
 }
 
 .heading {
-    font-size: small;
+    font-size: medium;
     font-weight: bolder;
     font-style: italic;
     text-align: center;
@@ -33,7 +33,7 @@
 
 .tbHead {
     border: 1px solid black;
-    font-size: xx-small;
+    font-size: small;
     padding : 10px;
     background-color: cornflowerblue;
     font-style: italic;
@@ -42,7 +42,7 @@
 .tbData {
     text-align: center;
     padding: 10px;
-    font-size: xx-small;
+    font-size: small;
     font-style: italic;
 }
 
@@ -52,17 +52,17 @@
     border-radius: 10px;
     background-color: cornflowerblue;
     font-weight: bold;
-    font-size: xx-small;
+    font-size: small;
     font-style: italic;
     cursor: pointer;
 }
 
 .modal {
-    height: 150px;
     width: fit-content;
+    height: 155px;
     overflow: auto;
-    margin: auto;
-    margin-top: 50px;
+    margin : auto;
+    margin-top: 150px;
 }
 
 .submittedBtn:hover {
@@ -74,120 +74,64 @@
     border: 1px solid black;
 }
 
-@media (min-width : 520px) {
-    .tbHead {
-        border: 1px solid black;
-        font-size: x-small;
-        padding : 10px;
-        background-color: cornflowerblue;
-        font-style: italic;
-    }
-    .tbData {
-        text-align: center;
-        padding: 10px;
-        font-size: x-small;
-        font-style: italic;
-    }
-    .heading {
-        font-size: small;
-    }
-    .submittedBtn {
-        padding: 10px;
-        border: 1px solid black;
-        border-radius: 10px;
-        background-color: cornflowerblue;
-        font-weight: bold;
-        font-size: x-small;
-        font-style: italic;
-        cursor: pointer;
-    }
+.spinnerContainer {
+    width: fit-content;
+    position: absolute;
+    top : 45%;
+    left: 50%;
 }
 
 
-@media (min-width : 580px) {
-    .tbHead {
-        border: 1px solid black;
-        font-size: small;
-        padding : 10px;
-        background-color: cornflowerblue;
-        font-style: italic;
-    }
-    .tbData {
-        text-align: center;
-        padding: 10px;
-        font-size: x-small;
-        font-style: italic;
-    }
-    .heading {
-        font-size: medium;
-    }
-    .submittedBtn {
-        padding: 10px;
-        border: 1px solid black;
-        border-radius: 10px;
-        background-color: cornflowerblue;
-        font-weight: bold;
-        font-size: small;
-        font-style: italic;
-        cursor: pointer;
+@media (max-width : 749px) and (min-width : 350px) {
+    .modal {
+        margin-top: 120px;
+        margin-left: 100px;
+        margin-right: 100px;
     }
 }
 
-
-@media (min-width : 680px) {
+@media screen and (min-width : 750px) {
     .tbHead {
-        border: 1px solid black;
         font-size: medium;
-        padding : 10px;
-        background-color: cornflowerblue;
-        font-style: italic;
-    }
-    .tbData {
-        text-align: center;
-        padding: 10px;
-        font-size: small;
-        font-style: italic;
     }
     .heading {
         font-size: large;
     }
-    .submittedBtn {
-        padding: 10px;
-        border: 1px solid black;
-        border-radius: 10px;
-        background-color: cornflowerblue;
-        font-weight: bold;
+    .tbData {
         font-size: small;
-        font-style: italic;
-        cursor: pointer;
+    }
+    .submittedBtn {
+        font-size: small;
     }
 }
 
-@media (min-width : 768px) {
+
+@media screen and (min-width : 800px) {
     .tbHead {
-        border: 1px solid black;
         font-size: large;
-        padding : 10px;
-        background-color: cornflowerblue;
-        font-style: italic;
-    }
-    .tbData {
-        text-align: center;
-        padding: 10px;
-        font-size: medium;
-        font-style: italic;
     }
     .heading {
         font-size: x-large;
     }
-    .submittedBtn {
-        padding: 10px;
-        border: 1px solid black;
-        border-radius: 10px;
-        background-color: cornflowerblue;
-        font-weight: bold;
+    .tbData {
         font-size: medium;
-        font-style: italic;
-        cursor: pointer;
+    }
+    .submittedBtn {
+        font-size: medium;
+    }
+}
+
+@media screen and (min-width : 992px) {
+    .tbHead {
+        font-size: x-large;
+    }
+    .heading {
+        font-size: xx-large;
+    }
+    .tbData {
+        font-size: large;
+    }
+    .submittedBtn {
+        font-size: large;
     }
 }
