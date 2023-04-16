@@ -27,6 +27,7 @@ export default function ServiceBox(props){
                     flex-direction : column;
                     justify-content : center;
                     margin : 20px;
+                    overflow : hidden;
                 }
                 .serviceType {
                     display : flex;

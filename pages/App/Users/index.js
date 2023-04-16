@@ -5,16 +5,17 @@ import { AiFillInfoCircle } from 'react-icons/ai'
 import useSWR from 'swr'
 import axios from 'axios'
 import Link from 'next/link'
+import { Atom } from 'react-loading-indicators'
 
 export default function Users(){
     const [userType,setUserType] = useState('Servicemen')
 
     const fetcher = async (...args) => {
         const response = await axios.get(args)
-        if(response.data.success) return response.data.servicemen
+        if(response.data.success) return response.data.data
     }
 
-    const { data , isLoading , mutate } = useSWR('http://localhost:3000/api/servicemen',fetcher)
+    const { data , isLoading , mutate } = useSWR(`http://localhost:3000/api/${userType}`,fetcher)
     
     const getDate = (value) => {
         const date = new Date(value)
@@ -22,13 +23,19 @@ export default function Users(){
     }
 
     const changeStatus = async (id,status) => {
-        const response = await axios.post('http://localhost:3000/api/servicemen/status',{
+        const response = await axios.post(`http://localhost:3000/api/${userType}/status`,{
             id : id ,
             status : status
         })
         if(response.data.success) mutate()
         else console.log('Error in status update')
     }
+
+    if(isLoading) return (
+        <div className = {styles.spinnerContainer}>
+            <Atom size = {'small'} color={'cornflowerblue'}  />
+        </div>
+    )
 
     return (
         <Layout>
@@ -60,21 +67,36 @@ export default function Users(){
                                             <td className = {styles.tbData}>{`${getDate(value.registration_date)}`}</td>
                                             <td className = {styles.tbData}>
                                                 <center>
-                                                    <Link href={{
-                                                        pathname : `Users/Servicemen/${value._id}` ,
-                                                        query : {
-                                                            firstname : value.firstname ,
-                                                            lastname : value.lastname ,
-                                                            cnic : value.cnic ,
-                                                            experience : value.experience ,
-                                                            contact : value.contact ,
-                                                            email : value.email ,
-                                                            serviceType : value.serviceType ,
-                                                            registration_date : `${getDate(value.registration_date)}`
-                                                        }
-                                                    }}>
-                                                        <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
-                                                    </Link>
+                                                    {
+                                                        userType === 'Servicemen' ?
+                                                        <Link href={{
+                                                            pathname : `Users/Servicemen/${value._id}` ,
+                                                            query : {
+                                                                firstname : value.firstname ,
+                                                                lastname : value.lastname ,
+                                                                cnic : value.cnic ,
+                                                                experience : value.experience ,
+                                                                contact : value.contact ,
+                                                                email : value.email ,
+                                                                serviceType : value.serviceType ,
+                                                                registration_date : `${getDate(value.registration_date)}`
+                                                            }
+                                                        }}>
+                                                            <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
+                                                        </Link> : <Link href={{
+                                                            pathname : `Users/Seeker/${value._id}` ,
+                                                            query : {
+                                                                firstname : value.firstname ,
+                                                                lastname : value.lastname ,
+                                                                contact : value.contact ,
+                                                                email : value.email ,
+                                                                occupation : value.occupation ,
+                                                                registration_date : `${getDate(value.registration_date)}`
+                                                            }
+                                                        }}>
+                                                            <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={30}/>
+                                                        </Link>
+                                                    }
                                                 </center>
                                             </td>
                                             <td className = {styles.tbData}>

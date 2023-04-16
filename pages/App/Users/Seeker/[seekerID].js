@@ -17,27 +17,27 @@ export default function Seeker(){
                     </div>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>First Name</legend>
-                        <p className = {styles.value}>Poorab</p>
+                        <p className = {styles.value}>{router.query.firstname}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Last Name</legend>
-                        <p className = {styles.value}>Gangwani</p>
+                        <p className = {styles.value}>{router.query.lastname}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Contact</legend>
-                        <p className = {styles.value}>03350298574</p>
+                        <p className = {styles.value}>{router.query.contact}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Email</legend>
-                        <p className = {styles.value}>poorabgangwani19@gmail.com</p>
+                        <p className = {styles.value}>{router.query.email}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Occupation</legend>
-                        <p className = {styles.value}>Student</p>
+                        <p className = {styles.value}>{router.query.occupation}</p>
                     </fieldset>
                     <fieldset className = {styles.field}>
                         <legend className = {styles.heading}>Date of Registration</legend>
-                        <p className = {styles.value}>Date Value</p>
+                        <p className = {styles.value}>{router.query.registration_date}</p>
                     </fieldset>
                 </div>
             </div>

@@ -10,7 +10,7 @@ export default async function Servicemen(req,res){
         }).toArray()
         res.json({
             success : true ,
-            servicemen : result
+            data : result
         })
     }
 }
