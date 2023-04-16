@@ -11,3 +11,13 @@
     display: flex;
     flex-direction: row;
 }
+
+@media (min-width : 100px) and (max-width : 600px) {
+    .container {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .images { 
+        flex-direction: column;
+    }
+}

@@ -2,7 +2,6 @@
     display: flex;
     width: 100%;
     padding: 10px;
-    margin: 0px;
     flex: 1;
     flex-direction: column;
     overflow: auto;
@@ -59,7 +58,7 @@
 
 .modal {
     width: fit-content;
-    height: 155px;
+    height: fit-content;
     overflow: auto;
     margin : auto;
     margin-top: 150px;
@@ -68,10 +67,6 @@
 .submittedBtn:hover {
     background-color: black;
     color: white;
-}
-
-.refRow {
-    border: 1px solid black;
 }
 
 .spinnerContainer {

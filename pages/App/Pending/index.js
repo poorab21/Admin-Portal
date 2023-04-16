@@ -11,9 +11,7 @@ import { Atom } from "react-loading-indicators"
 import Link from "next/link";
 
 export default function Pending(){
-    const [showRef,setShowRef] = useState(false)
-    const [references,setReferences] = useState([])
-
+    const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     const fetcher = async (...args) => {
         const response = await axios.get(args)
         if(response.data.success) return response.data.pendings
@@ -25,6 +23,11 @@ export default function Pending(){
         const currentDate = new Date()
         const duration = moment(currentDate).diff(date,'days')
         return duration
+    }
+
+    const getDate = (date) => {
+        const value = new Date(date)
+        return `${value.getDate()} ${Months[value.getMonth()]} ${value.getFullYear()}`
     }
 
     const submitted = async (id) => {
@@ -70,8 +73,7 @@ export default function Pending(){
                                 <tr>    
                                     <th className = {styles.tbHead}>S.NO</th>
                                     <th className = {styles.tbHead}>Full Name</th>
-                                    <th className = {styles.tbHead}>Date of Submission</th>
-                                    <th className = {styles.tbHead}>References</th>
+                                    <th className = {styles.tbHead}>Form Submitted</th>
                                     <th className = {styles.tbHead}>Application</th>
                                     <th className = {styles.tbHead}>Credentials submitted</th>
                                     <th className = {styles.tbHead}>Status</th>
@@ -88,22 +90,8 @@ export default function Pending(){
                                                 </td>
                                                 <td className = {styles.tbData}>
                                                     {
-                                                    `${
-                                                        (new Date(value.registration_date)).getDate()
-                                                    }/${
-                                                        (new Date(value.registration_date)).getMonth() + 1
-                                                    }/${
-                                                        (new Date(value.registration_date)).getFullYear()
-                                                    } (${getPendingTime()} days ago)`
+                                                    `${getPendingTime(value.registration_date)} days ago`
                                                     }
-                                                </td>
-                                                <td className = {styles.tbData}>
-                                                    <center>
-                                                        <IoIosInformationCircle 
-                                                        onClick={() => { setShowRef(true) ; setReferences(value.references) }} 
-                                                        size={25} 
-                                                        style = {{ cursor : 'pointer' }} />
-                                                    </center>
                                                 </td>
                                                 <td className = {styles.tbData}>
                                                     <center>
@@ -116,7 +104,9 @@ export default function Pending(){
                                                                 cnic : value.cnic ,
                                                                 experience : value.experience ,
                                                                 contact : value.contact ,
-                                                                email : value.email
+                                                                email : value.email ,
+                                                                registration_date : `${getDate(value.registration_date)}` ,
+                                                                references : JSON.stringify(value.references)
                                                             }
                                                         }}>
                                                             <IoIosInformationCircle 
@@ -150,65 +140,6 @@ export default function Pending(){
                             </tbody>
                         </table>
                     </div>
-                    <Modal
-                    isOpen = {showRef}
-                    onRequestClose={() => setShowRef(false)}
-                    className={styles.modal}
-                    >
-                        <table>
-                            <tbody>
-                                <tr className = {styles.refRow}>
-                                    <th className = {styles.tbHead}>S.No</th>
-                                    <th className = {styles.tbHead}>Name</th>
-                                    <th className = {styles.tbHead}>Occupation</th>
-                                    <th className = {styles.tbHead}>Contact</th>
-                                    <th className = {styles.tbHead}>Email Address</th>
-                                </tr>
-                                {
-                                    references.map((value,index)=>{
-                                        return (
-                                            <>
-                                                <tr className = {styles.refRow} key={index}>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        { index + 1 }
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.name}
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.occupation}
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.contact}
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.email}
-                                                    </td>
-                                                </tr>
-                                                <tr className = {styles.refRow} key={index}>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        { index + 1 }
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.name}
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.occupation}
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.contact}
-                                                    </td>
-                                                    <td className = {styles.tbData} style = {{ backgroundColor : 'wheat' }}>
-                                                        {value.email}
-                                                    </td>
-                                                </tr>
-                                            </>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
-                    </Modal>
                 </div>
             </Layout>
         </>

@@ -14,13 +14,20 @@
     border-radius: 10px;
     justify-content: center;
     flex: 1;
+    display: flex;
 }
 
 .applicantName {
     text-align: center;
     font-weight: bolder;
     font-size: 25px;
+    flex: 1;
     font-style: italic;
+}
+
+.referenceIcon {
+    margin: auto;
+    cursor: pointer;
 }
 
 .applicant {
@@ -32,7 +39,7 @@
 }
 
 .application {
-    flex: 11;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -55,9 +62,29 @@
     font-style: italic;
 }
 
+.references {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.reference {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    background-color: cornflowerblue;
+}
+
+.refInfo {
+    flex: 3;
+}
+
 @media (min-width : 600px) {
     .application {
-        flex: 11;
+        flex: 1;
         display: grid;
         grid-template-columns: 1fr 1fr;
     }

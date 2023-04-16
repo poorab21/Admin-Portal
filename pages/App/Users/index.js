@@ -54,7 +54,6 @@ export default function Users(){
                             <tr>
                                 <th className = {styles.tbHead}>ID</th>
                                 <th className = {styles.tbHead}>Name</th>
-                                <th className = {styles.tbHead}>Date of Registration</th>
                                 <th className = {styles.tbHead}>Profile</th>
                                 <th className = {styles.tbHead}>status</th>
                             </tr>
@@ -64,7 +63,6 @@ export default function Users(){
                                         <tr key={index}>
                                             <td className = {styles.tbData}>{value._id}</td>
                                             <td className = {styles.tbData}>{`${value.firstname} ${value.lastname}`}</td>
-                                            <td className = {styles.tbData}>{`${getDate(value.registration_date)}`}</td>
                                             <td className = {styles.tbData}>
                                                 <center>
                                                     {

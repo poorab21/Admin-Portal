@@ -130,8 +130,8 @@ export default function serviceType(){
                     ariaHideApp = {false}
                     style = {{
                         content : {
-                            width : '300px' ,
-                            height : '300px' ,
+                            width : 'fit-content' ,
+                            height : 'fit-content' ,
                             margin : 'auto' ,
                             display : 'flex' ,
                             flexDirection : 'column'
