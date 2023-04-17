@@ -38,6 +38,7 @@ export default function Transactions(){
             <Atom size = {'small'} color={'cornflowerblue'}  />
         </div>
     )
+    console.log(data)
     return (
         <Layout>
             <div className = {styles.container}>
@@ -176,7 +177,13 @@ export default function Transactions(){
                 <Modal
                 isOpen = {openCalendar}
                 ariaHideApp = {false}
-                className={styles.calendarModal}
+                style={{
+                    content : {
+                        width: "fit-content",
+                        height: "fit-content",
+                        margin: "auto"
+                    }
+                }}
                 onRequestClose={() => setOpenCalendar(false)}
                 >
                     <Calendar

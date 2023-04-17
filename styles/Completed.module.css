@@ -29,7 +29,7 @@
 
 .row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .column {
@@ -58,4 +58,10 @@
     font-style: italic;
     text-align: center;
     margin: 10px;
+}
+
+@media (min-width : 690px) {
+    .row {
+        flex-direction: row;
+    }
 }

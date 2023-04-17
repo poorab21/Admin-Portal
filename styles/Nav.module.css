@@ -99,10 +99,23 @@
     border: none;
 }
 
+  .collapsed::-webkit-scrollbar , .container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .collapsed::-webkit-scrollbar-track , .container::-webkit-scrollbar-track {
+    background: white; 
+  }
+  
+  .collapsed::-webkit-scrollbar-thumb , .container::-webkit-scrollbar-thumb {
+    background: blue; 
+  }
+
 @media screen and (max-height : 600px) {
     .container {
         width: 3.3rem;
         height: 100%;
+        overflow-y: auto;
         border: 5px solid cornflowerblue;
         background-color:cornflowerblue;
         transition-duration: 0s;
@@ -115,6 +128,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
         border: 5px solid cornflowerblue;
         background-color:cornflowerblue;
         transition: all 0.3s linear;
