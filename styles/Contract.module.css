@@ -13,7 +13,7 @@
     background-color: cornflowerblue;
     font-weight: bolder;
     overflow-wrap: break-word;
-    font-size: 25px;
+    font-size: medium;
     font-style: italic;
     flex: 1;
 }
@@ -26,12 +26,13 @@
 
 .row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .tbData {
     text-align: center;
     font-style: italic;
+    font-size: x-small;
     padding: 10px;
 }
 
@@ -39,6 +40,7 @@
     border: 1px solid black;
     background-color: cornflowerblue;
     font-style: italic;
+    font-size: small;
 }
 
 
@@ -76,4 +78,59 @@
     border: 1px solid black;
     margin-top: 10px;
     flex: 1;
+}
+
+@media (min-width : 600px) {
+    .tbData {
+        font-size: x-small;
+    }
+    
+    .tbHead {
+        font-size: small;
+    }
+    .header {
+        font-size: medium;
+    }
+    .row {
+        flex-direction: row;
+    }
+}
+
+@media (min-width : 680px) {
+    .tbData {
+        font-size: small;
+    }
+    
+    .tbHead {
+        font-size: medium;
+    }
+    .header {
+        font-size: large;
+    }
+}
+
+@media (min-width : 800px) {
+    .tbData {
+        font-size: medium;
+    }
+    
+    .tbHead {
+        font-size: large;
+    }
+    .header {
+        font-size: x-large;
+    }   
+}
+
+@media (min-width : 992px) {
+    .tbData {
+        font-size: large;
+    }
+    
+    .tbHead {
+        font-size: x-large;
+    }
+    .header {
+        font-size: xx-large;
+    }   
 }

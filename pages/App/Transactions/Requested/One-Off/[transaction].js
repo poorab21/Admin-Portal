@@ -41,7 +41,7 @@ export default function Transaction(){
         else {
             return (
                 <tr className = {styles.tbRow}>
-                    <td colSpan={3}>
+                    <td className = {styles.tbData} colSpan={3}>
                         <center>
                             No Conditions set by Customer
                         </center>
