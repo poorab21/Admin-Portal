@@ -90,7 +90,7 @@ export default function Pending(){
                                                 </td>
                                                 <td className = {styles.tbData}>
                                                     {
-                                                    `${getPendingTime(value.registration_date)} days ago`
+                                                    `${getPendingTime(value.registration_date)} day/s ago`
                                                     }
                                                 </td>
                                                 <td className = {styles.tbData}>

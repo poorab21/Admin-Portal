@@ -38,7 +38,6 @@ export default function Transactions(){
             <Atom size = {'small'} color={'cornflowerblue'}  />
         </div>
     )
-    console.log(data)
     return (
         <Layout>
             <div className = {styles.container}>
@@ -123,7 +122,7 @@ export default function Transactions(){
                                                 query : { 
                                                         ...value ,
                                                         customer : `${value.customer[0].firstname} ${value.customer[0].lastname}` ,
-                                                        provider : `${value.provider[0].firstname} ${value.provider[0].lastname}`,
+                                                        provider : `${value.provider[0]?.firstname} ${value.provider[0]?.lastname}`,
                                                         TaskList : JSON.stringify(value.TaskList) ,
                                                         TOC : JSON.stringify(value.TOC) ,
                                                         Ratings : JSON.stringify(value.Ratings)

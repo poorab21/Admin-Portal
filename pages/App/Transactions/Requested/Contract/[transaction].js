@@ -26,7 +26,7 @@ export default function Transaction(){
         if(TOC.length > 0) {
             return TOC.map((value,index)=>{
                 return (
-                    <tr className = {styles.tbRow}>
+                    <tr key = {index} className = {styles.tbRow}>
                         <td className = {styles.tbData}>{index+1}</td>
                         <td className = {styles.tbData}>{value.condition}</td>
                         <td className = {styles.tbData}>
