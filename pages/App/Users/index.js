@@ -70,6 +70,7 @@ export default function Users(){
                                                         <Link href={{
                                                             pathname : `Users/Servicemen/${value._id}` ,
                                                             query : {
+                                                                id : value._id ,
                                                                 firstname : value.firstname ,
                                                                 lastname : value.lastname ,
                                                                 cnic : value.cnic ,
@@ -84,6 +85,7 @@ export default function Users(){
                                                         </Link> : <Link href={{
                                                             pathname : `Users/Seeker/${value._id}` ,
                                                             query : {
+                                                                id : value._id ,
                                                                 firstname : value.firstname ,
                                                                 lastname : value.lastname ,
                                                                 contact : value.contact ,

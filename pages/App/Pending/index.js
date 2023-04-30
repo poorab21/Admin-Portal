@@ -2,8 +2,6 @@ import Layout from "../../../Component/Layout";
 import styles from '../../../styles/Pending.module.css';
 import { IoIosInformationCircle } from 'react-icons/io'
 import { FcApprove , FcDisapprove } from 'react-icons/fc'
-import Modal from 'react-modal'
-import { useState } from "react";
 import useSWR from 'swr'
 import axios from "axios";
 import moment from 'moment/moment'
@@ -98,6 +96,7 @@ export default function Pending(){
                                                         <Link href={{
                                                             pathname : `Pending/${index+1}` ,
                                                             query : {
+                                                                id : value._id ,
                                                                 firstname : value.firstname ,
                                                                 lastname : value.lastname ,
                                                                 serviceType : value.serviceType ,

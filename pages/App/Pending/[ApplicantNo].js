@@ -5,10 +5,15 @@ import { FaUserCircle } from 'react-icons/fa'
 import { VscReferences } from 'react-icons/vsc'
 import Modal  from 'react-modal'
 import { useState } from "react";
+import useSWR from 'swr'
+import axios from "axios";
+import Image from "next/image";
+import { useMutation } from "react-query";
 
 export default function Applicant(){
     const router = useRouter()
     const { 
+        id ,
         firstname , 
         lastname ,
         email ,
@@ -19,8 +24,14 @@ export default function Applicant(){
         references ,
         registration_date
         } = router.query 
-        let References = references && JSON.parse(references)
-        const [showRef,setShowRef] = useState(false)
+    let References = references && JSON.parse(references)
+    const [showRef,setShowRef] = useState(false)
+    const [showPic,setShowPic] = useState(false)
+    
+    const { data : userImg , isLoading } = useMutation((data)=>{
+        return axios.post('http://localhost:3000/api/Pending/userImg',data)
+    })
+    
     return (
         <Layout>
             <div className = {styles.container}>
@@ -33,7 +44,10 @@ export default function Applicant(){
                     </p>
                 </div>
                 <div className = {styles.applicant}>
-                    <FaUserCircle size={150}/>
+                    <FaUserCircle 
+                    size={150} 
+                    style={{ cursor : 'pointer' }} 
+                    onClick={ isLoading ? null : () => setShowPic(true)}/>
                 </div>
                 <div className = {styles.application}>
                     <fieldset className = {styles.field}>
@@ -88,7 +102,7 @@ export default function Applicant(){
                         <hr/>
                         <div className = {styles.references}>
                             {
-                                References.map((value,index)=>{
+                                References?.map((value,index)=>{
                                     return (
                                         <div key={index} className = {styles.reference}>
                                             <FaUserCircle size={70} style={{ flex : 1 , alignSelf : 'center' }} color = {'white'} />
@@ -112,6 +126,32 @@ export default function Applicant(){
                             }   
                         </div>
                     </div>
+                </Modal>
+                <Modal
+                isOpen = {showPic}
+                onRequestClose={() => setShowPic(false)}
+                style={{
+                    content : {
+                        margin : 'auto' ,
+                        height : '400px' ,
+                        width : '350px'
+                    }
+                }}
+                ariaHideApp = {false}
+                >
+                    {
+                        userImg?.data?.image?.img ? 
+                        <Image
+                        src={`data:${userImg.data.image.imgtype};base64,${userImg.data.image.img}`}
+                        width={300}
+                        height={150}
+                        alt={'Applicant Picture'}
+                        />
+                        :
+                        <p style={{ height : '100%' , textAlign : 'center' , paddingTop : '50%' }}>
+                            No Profile Picture
+                        </p>
+                    }
                 </Modal>
             </div>
         </Layout>
