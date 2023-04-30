@@ -4,7 +4,7 @@ export default function Dashboard(){
     return (
         <Layout>
             <p>
-                Dashboard
+                OTP
             </p>
         </Layout>
     )
