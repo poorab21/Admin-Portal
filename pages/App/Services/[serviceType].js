@@ -37,7 +37,8 @@ export default function serviceType(){
             hourly : hourly
         })
         if(response.data.success) { closeModal() ; mutate()  }
-        else console.log('Error in Insertion') 
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Insertion')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/') 
     }
 
     const del = async (id) => {
@@ -45,7 +46,8 @@ export default function serviceType(){
             id : id
         })
         if(response.data.success) { mutate() }
-        else console.log('Error in Deletion')
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Deletion')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/')     
     }
 
     const edit = async (id) => {
@@ -55,7 +57,8 @@ export default function serviceType(){
             hourly : hourly
         })
         if(response.data.success) { closeModal() ; mutate() }
-        else console.log('Error in Update')
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Editing')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/') 
     }
 
 

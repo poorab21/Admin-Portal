@@ -4,9 +4,13 @@ import styles from '../../styles/Complaints.module.css'
 import useSWR from 'swr'
 import axios from 'axios'
 import { Atom } from 'react-loading-indicators'
+import { useEffect } from 'react'
+import { checkCookie } from '../../Component/checkCookie'
+import { useRouter } from 'next/router'
 
 export default function Complaints(){
     const [userType,setUserType] = useState('Servicemen')
+    const router = useRouter()
 
     const fetcher = async () => {
         const response = await axios.get(`http://localhost:3000/api/grievances/${userType}`)
@@ -16,6 +20,16 @@ export default function Complaints(){
     const { data , isLoading } = useSWR(`http://localhost:3000/api/grievances/${userType}`,fetcher,{
         revalidateOnFocus : true
     })
+
+    
+    const hasCookieExpired = async () =>{
+        const result = await checkCookie()
+        result ? null : router.push('/')
+    }
+    
+    useEffect(()=>{
+        hasCookieExpired()
+    },[userType])
     
     if(isLoading) return (
         <div className = {styles.spinnerContainer}>

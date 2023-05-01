@@ -9,7 +9,7 @@ export default function Completed(){
     const started = new Date(router.query.started)
     const ended = new Date(router.query.ended)
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    let ratings = JSON.parse(router.query.Ratings)
+    let ratings = router?.query?.Ratings ? JSON.parse(router.query.Ratings) : '0' 
     return (
         <Layout>
             <div className = {styles.container}>

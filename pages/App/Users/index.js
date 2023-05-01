@@ -6,9 +6,13 @@ import useSWR from 'swr'
 import axios from 'axios'
 import Link from 'next/link'
 import { Atom } from 'react-loading-indicators'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { checkCookie } from '../../../Component/checkCookie'
 
 export default function Users(){
     const [userType,setUserType] = useState('Servicemen')
+    const router = useRouter()
 
     const fetcher = async (...args) => {
         const response = await axios.get(args)
@@ -28,8 +32,18 @@ export default function Users(){
             status : status
         })
         if(response.data.success) mutate()
-        else console.log('Error in status update')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/')
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Status Update')
     }
+
+    const hasCookieExpired = async () =>{
+        const result = await checkCookie()
+        result ? null : router.push('/')
+    }
+    
+    useEffect(()=>{
+        hasCookieExpired()
+    },[userType])
 
     if(isLoading) return (
         <div className = {styles.spinnerContainer}>

@@ -7,9 +7,12 @@ import axios from "axios";
 import moment from 'moment/moment'
 import { Atom } from "react-loading-indicators"
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Pending(){
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    const router = useRouter()
+
     const fetcher = async (...args) => {
         const response = await axios.get(args)
         if(response.data.success) return response.data.pendings
@@ -33,7 +36,8 @@ export default function Pending(){
             id : id
         }) 
         if(response.data.success) { mutate() }
-        else console.log('Error in Credential Update')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/')
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Credential Update')
     }
 
     const approve = async (id) => {
@@ -41,7 +45,8 @@ export default function Pending(){
             id : id
         })
         if(response.data.success) mutate()
-        else console.log('Error in Approval')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/')
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Approval')
     }
 
     const reject = async (id) => {
@@ -49,7 +54,8 @@ export default function Pending(){
             id : id
         })
         if(response.data.success) mutate()
-        else console.log('Error in Rejection')
+        else if(!response.data.success && response.data.tokenExpired) router.push('/')
+        else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Rejection')
     }
 
     if(isLoading) return (

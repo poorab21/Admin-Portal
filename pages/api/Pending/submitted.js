@@ -1,8 +1,9 @@
+import { hasCookie } from "cookies-next";
 import clientPromise from "../../../lib/mongo";
 import { ObjectId } from "mongodb";
 
 export default async function Submitted(req,res){
-    if(req.method === 'POST'){
+    if(req.method === 'POST' && hasCookie('token',{req,res})){
         const client = await clientPromise
         const { id } = req.body
         const db = client.db('test')
@@ -18,7 +19,9 @@ export default async function Submitted(req,res){
         result.value ? res.json({
             success : true
         }) : res.json({
-            success : false
+            success : false , 
+            tokenExpired : false
         })
     }
+    else res.json({ success : false , tokenExpired : true })
 }

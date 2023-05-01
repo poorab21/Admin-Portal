@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import Layout from '../../../Component/Layout'
 import styles from '../../../styles/Transactions.module.css'
 import { HiInformationCircle } from 'react-icons/hi'
@@ -10,6 +10,8 @@ import Modal from 'react-modal'
 import { BiUserCircle } from 'react-icons/bi'
 import { BsFillCalendarDateFill , BsFillArrowLeftCircleFill , BsFillArrowRightCircleFill } from 'react-icons/bs'
 import Calendar from 'react-calendar'
+import { checkCookie } from '../../../Component/checkCookie'
+import { useRouter } from 'next/router'
 
 export default function Transactions(){
     const [type,setType] = useState('One-Off')
@@ -18,6 +20,8 @@ export default function Transactions(){
     const [requestees,setRequestees] = useState([])
     const [date,setDate] = useState(new Date())
     const [openCalendar,setOpenCalendar] = useState(false)
+    const router = useRouter()
+
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     const fetcher = async (...args) => {
         const response = status === 'Completed' ? await axios.post(args,{
@@ -33,6 +37,16 @@ export default function Transactions(){
         else if(status === 'Completed') return value.transaction_id;
         else return value._id; 
     }
+
+    const hasCookieExpired = async () =>{
+        const result = await checkCookie()
+        result ? null : router.push('/')
+    }
+    
+    useEffect(()=>{
+        hasCookieExpired()
+    },[type,status,date])
+
     if(isLoading) return (
         <div className = {styles.spinnerContainer}>
             <Atom size = {'small'} color={'cornflowerblue'}  />

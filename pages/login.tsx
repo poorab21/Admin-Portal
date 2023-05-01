@@ -38,6 +38,7 @@ export default function Login(){
                         alt = {'Maid In Logo'}
                         width = {400}
                         height = {400}
+                        priority = {true}
                         style = {{ margin : "auto" , height : "100%" }}
                         />
                     </div>
