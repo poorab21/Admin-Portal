@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { TextField , InputAdornment , Button } from '@mui/material'
+import { AiOutlineMail } from 'react-icons/ai'
+import { RiLockPasswordFill } from 'react-icons/ri'
 
 export default function Login(){
     const router = useRouter()
@@ -45,28 +48,32 @@ export default function Login(){
                 </div>
                 <form className = {styles.form}>
                     <div className = {styles.field}>    
-                        <label 
-                        className = {styles.labeltxt} 
-                        htmlFor='email'>
-                            Email Address
-                        </label>
-                        <input 
+                        <TextField 
                         onChange={(e) => setEmail(e.target.value)} 
+                        label = {'Enter Email Address'}
                         value = {email}  
                         type={'email'} 
-                        className = {styles.inputbox} />
+                        className = {styles.inputbox} 
+                        InputProps={{
+                            startAdornment : <InputAdornment position="start">
+                                <AiOutlineMail size={30}/>
+                            </InputAdornment>
+                        }}
+                        />
                     </div>
                     <div className = {styles.field}>    
-                        <label 
-                        className = {styles.labeltxt} 
-                        htmlFor='password'>
-                            Password
-                        </label>
-                        <input 
+                        <TextField 
                         type={'password'} 
+                        label = {'Enter Password'}
                         onChange = {(e) => setPassword(e.target.value)}
                         value = {password}
-                        className = {styles.inputbox} />
+                        className = {styles.inputbox}
+                        InputProps={{
+                            startAdornment : <InputAdornment position="start">
+                                <RiLockPasswordFill size={30}/>
+                            </InputAdornment>
+                        }}
+                        />
                     </div>
                     {
                         error ?
@@ -82,10 +89,12 @@ export default function Login(){
                         </a>
                     </div>
                     <div  className = {styles.btn}>
-                        <input 
-                        type={'submit'} 
+                        <Button 
+                        type='submit' 
                         className = {styles.submit}
-                        onClick = {(e) => { e.preventDefault() ; login() }} />
+                        onClick = {(e) => { e.preventDefault() ; login() }}>
+                            Sign In
+                        </Button>
                     </div>
                 </form>
             </div>

@@ -7,6 +7,9 @@ import { Atom } from 'react-loading-indicators'
 import { useEffect } from 'react'
 import { checkCookie } from '../../Component/checkCookie'
 import { useRouter } from 'next/router'
+import React from 'react'
+import { MenuItem, Select, Stack, TableCell, TableRow, Typography } from '@mui/material'
+import { TableVirtuoso } from 'react-virtuoso'
 
 export default function Complaints(){
     const [userType,setUserType] = useState('Servicemen')
@@ -16,21 +19,20 @@ export default function Complaints(){
         const response = await axios.get(`http://localhost:3000/api/grievances/${userType}`)
         if(response.data.success) return response.data.grievances;
     }
-
+        
     const { data , isLoading } = useSWR(`http://localhost:3000/api/grievances/${userType}`,fetcher,{
         revalidateOnFocus : true
     })
 
-    
     const hasCookieExpired = async () =>{
         const result = await checkCookie()
         result ? null : router.push('/')
     }
-    
+            
     useEffect(()=>{
         hasCookieExpired()
     },[userType])
-    
+            
     if(isLoading) return (
         <div className = {styles.spinnerContainer}>
             <Atom size = {'small'} color={'cornflowerblue'}  />
@@ -38,61 +40,53 @@ export default function Complaints(){
     )
 
     return (
-        <Layout>
-            <div className = {styles.container}>
-                <div className = {styles.header}>
-                    <p className = {styles.userType}>
-                        {userType}
-                    </p>
-                    <select className = {styles.filter} value={userType} onChange = {(e) => setUserType(e.target.value)}>
-                        <option>Servicemen</option>
-                        <option>Seeker</option>
-                    </select>
-                </div>
-                <hr/>
-                <table className = {styles.table}>
-                    <tbody>
-                        <tr className = {styles.tbRow}>
-                            <th className = {styles.tbHead}>
-                                S.No
-                            </th>
-                            <th className = {styles.tbHead}>
-                                Grievance
-                            </th>
-                            <th className = {styles.tbHead}>
-                                Date of Submission
-                            </th>
-                            <th className = {styles.tbHead}>
-                                Made By
-                            </th>
-                        </tr>
-                        {
-                            data && data.map((value,index)=>{
-                                return (
-                                    <tr key={index}>
-                                        <td className = {styles.tbData}>
-                                            { index + 1 }
-                                        </td>
-                                        <td className = {styles.tbData}>
-                                            { value.email }
-                                        </td>
-                                        <td className = {styles.tbData}>
-                                            {
-                                                (new Date(value.submission)).getDate() + '/' +
-                                                Number((new Date(value.submission)).getMonth()+1) + '/' +
-                                                (new Date(value.submission)).getFullYear()
-                                            }
-                                        </td>
-                                        <td className = {styles.tbData}>
-                                            {value.person}
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </Layout>
+        <React.Fragment>
+            <Layout>
+                <Stack  
+                direction={'column'} 
+                spacing={2} 
+                className = {styles.container}>
+                    <Stack direction={'row'} className = {styles.header}>
+                        <Typography className = {styles.heading}>Complaints</Typography>
+                        <Select 
+                        className = {styles.filter} 
+                        label = {'User Type'} 
+                        value={userType} 
+                        onChange={(e)=> setUserType(e.target.value)}>
+                            <MenuItem value = {'Servicemen'}>Servicemen</MenuItem>
+                            <MenuItem value = {'Seeker'}>Seeker</MenuItem>
+                        </Select>
+                    </Stack>
+                    <TableVirtuoso 
+                    className={styles.table}
+                    data = {data}
+                    itemContent={(index,complaint) => (
+                        <>
+                            <TableCell className = {styles.row}>{ index + 1 }</TableCell>
+                            <TableCell className = {styles.row}>{ complaint.email }</TableCell>
+                            <TableCell className = {styles.row}>
+                            {
+                                (new Date(complaint.submission)).getDate() + '/' +
+                                Number((new Date(complaint.submission)).getMonth()+1) + '/' +
+                                (new Date(complaint.submission)).getFullYear()
+                            }
+                            </TableCell>
+                            <TableCell className = {styles.row}>
+                                {complaint.person}
+                            </TableCell>
+                        </>
+                    )}
+                    fixedHeaderContent={() => (
+                        <TableRow>
+                            <TableCell className = {styles.tbHead}>S-NO</TableCell>
+                            <TableCell className = {styles.tbHead}>Complaint</TableCell>
+                            <TableCell className = {styles.tbHead}>Date of Submission</TableCell>
+                            <TableCell className = {styles.tbHead}>Made By</TableCell>
+                        </TableRow>
+                    )}
+                    />
+                </Stack>
+            </Layout>
+        </React.Fragment>
     )
 }

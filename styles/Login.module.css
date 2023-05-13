@@ -30,15 +30,7 @@
     margin: 20px;
     padding: 20px;
 }
-
-.labeltxt {
-    font-size: 25px;
-    font-weight: bold;
-    font-style: italic;
-}
-
 .inputbox {
-    border: 2px solid black;
     border-radius: 10px;
     width: 100%;
     padding: 10px;
@@ -63,6 +55,9 @@
     width: 100%;
     padding: 10px;
     cursor: pointer;
+    font-size: large;
+    color : black;
+    font-weight: bold;
 }
 
 .submit:hover{

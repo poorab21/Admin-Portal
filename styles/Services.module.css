@@ -10,6 +10,7 @@
 .images { 
     display: flex;
     flex-direction: row;
+    margin: 10px;
 }
 
 @media (min-width : 100px) and (max-width : 600px) {

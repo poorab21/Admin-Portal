@@ -8,6 +8,9 @@ import moment from 'moment/moment'
 import { Atom } from "react-loading-indicators"
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React from 'react'
+import { Button, Stack, TableCell, TableRow, Typography } from "@mui/material";
+import { TableVirtuoso } from "react-virtuoso";
 
 export default function Pending(){
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -67,85 +70,85 @@ export default function Pending(){
     return (
         <>
             <Layout>
-                <div className = {styles.container}>
-                    <div className = {styles.header}>
-                        <p className = {styles.heading}>Pending Applications</p>
-                    </div>
-                    <div className = {styles.body}>
-                        <table className = {styles.applicants}>
-                            <tbody>
-                                <tr>    
-                                    <th className = {styles.tbHead}>S.NO</th>
-                                    <th className = {styles.tbHead}>Full Name</th>
-                                    <th className = {styles.tbHead}>Form Submitted</th>
-                                    <th className = {styles.tbHead}>Application</th>
-                                    <th className = {styles.tbHead}>Credentials submitted</th>
-                                    <th className = {styles.tbHead}>Status</th>
-                                </tr>
+                <React.Fragment>
+                    <Stack
+                    direction = {'column'}
+                    spacing = {2}
+                    className = {styles.container}
+                    >
+                        <Typography className = {styles.heading}>
+                            Pending Applications
+                        </Typography>
+                        <TableVirtuoso
+                        data={data}
+                        fixedHeaderContent={() => (
+                            <TableRow>
+                                <TableCell className = {styles.tbHead}>S-NO</TableCell>
+                                <TableCell className = {styles.tbHead}>Full Name</TableCell>
+                                <TableCell className = {styles.tbHead}>Form Submitted</TableCell>
+                                <TableCell className = {styles.tbHead}>Application</TableCell>
+                                <TableCell className = {styles.tbHead}>Credentials Submitted</TableCell>
+                                <TableCell className = {styles.tbHead}>Status</TableCell>
+                            </TableRow>
+                        )}
+                        itemContent={(index,applicant) => (
+                            <>
+                                <TableCell className = {styles.tbData}>{ index + 1 }</TableCell>
+                                <TableCell className = {styles.tbData}>{`${applicant.firstname} ${applicant.lastname}`}</TableCell>
+                                <TableCell className = {styles.tbData}>
+                                    {
+                                        `${getPendingTime(applicant.registration_date)} day/s ago`
+                                    }
+                                </TableCell>
+                                <TableCell className = {styles.tbData}>
+                                    <center>
+                                        <Link href={{
+                                        pathname : `Pending/${index+1}` ,
+                                        query : {
+                                            id : applicant._id ,
+                                            firstname : applicant.firstname ,
+                                            lastname : applicant.lastname ,
+                                            serviceType : applicant.serviceType ,
+                                            cnic : applicant.cnic ,
+                                            experience : applicant.experience ,
+                                            contact : applicant.contact ,
+                                            email : applicant.email ,
+                                            registration_date : `${getDate(applicant.registration_date)}` ,
+                                            references : JSON.stringify(applicant.references)
+                                        }
+                                    }}>
+                                            <IoIosInformationCircle 
+                                            size={25} 
+                                            style = {{ cursor : 'pointer' }} />
+                                        </Link>
+                                    </center>
+                                </TableCell>
+                                <TableCell className = {styles.tbData}>
                                 {
-                                    data && data.map((value,index)=>{
-                                        return (
-                                            <tr key = {index}>
-                                                <td className = {styles.tbData}>
-                                                    { index + 1 }
-                                                </td>
-                                                <td className = {styles.tbData}>
-                                                    {`${value.firstname} ${value.lastname}`}
-                                                </td>
-                                                <td className = {styles.tbData}>
-                                                    {
-                                                    `${getPendingTime(value.registration_date)} day/s ago`
-                                                    }
-                                                </td>
-                                                <td className = {styles.tbData}>
-                                                    <center>
-                                                        <Link href={{
-                                                            pathname : `Pending/${index+1}` ,
-                                                            query : {
-                                                                id : value._id ,
-                                                                firstname : value.firstname ,
-                                                                lastname : value.lastname ,
-                                                                serviceType : value.serviceType ,
-                                                                cnic : value.cnic ,
-                                                                experience : value.experience ,
-                                                                contact : value.contact ,
-                                                                email : value.email ,
-                                                                registration_date : `${getDate(value.registration_date)}` ,
-                                                                references : JSON.stringify(value.references)
-                                                            }
-                                                        }}>
-                                                            <IoIosInformationCircle 
-                                                            size={25} 
-                                                            style = {{ cursor : 'pointer' }} />
-                                                        </Link>
-                                                    </center>
-                                                </td>
-                                                <td className = {styles.tbData}>
-                                                    {
-                                                        value.credentials ? 'Submitted' :    
-                                                        <button 
-                                                        className = {styles.submittedBtn} 
-                                                        onClick = {() => submitted(value._id)}>
-                                                            Submitted
-                                                        </button>
-                                                    }
-                                                </td>
-                                                <td className = {styles.tbData}>
-                                                    <button>
-                                                        <FcApprove size={30} onClick = {() => approve(value._id)}/>
-                                                    </button>
-                                                    <button>
-                                                        <FcDisapprove size={30} onClick = {() => reject(value._id)}/>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
+                                    applicant.credentials ? 
+                                    <Typography>Submitted</Typography> 
+                                    :
+                                    <center>
+                                        <Button className = {styles.submittedBtn} onClick = {() => submitted(applicant._id)}>
+                                            Submitted
+                                        </Button>
+                                    </center>
+                                        
                                 }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                </TableCell>
+                                <TableCell className = {styles.tbData}>
+                                    <Button>
+                                        <FcApprove size={30} onClick = {() => approve(applicant._id)}/>
+                                    </Button>
+                                    <Button>
+                                        <FcDisapprove size={30} onClick = {() => reject(applicant._id)}/>
+                                    </Button>
+                                </TableCell>
+                            </>
+                        )}
+                        />
+                    </Stack>
+                </React.Fragment>
             </Layout>
         </>
     )
