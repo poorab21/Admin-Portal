@@ -8,15 +8,27 @@ import axios from "axios"
 import Modal from 'react-modal'
 import { useState } from "react"
 import { Atom } from "react-loading-indicators"
+import { 
+    IconButton, 
+    Paper, 
+    Stack, 
+    Table, 
+    TableBody, 
+    TableCell, 
+    TableContainer, 
+    TableHead, 
+    TableRow, 
+    Typography , 
+    Button } from "@mui/material"
 
-export default function serviceType(){
+export default function serviceType({ params }){
     const [modal,setModal] = useState(false)
     const [task,setTask] = useState('')
     const [hourly,setHourly] = useState(100)
     const [selectedTask,setSelectedTask] = useState(null)
     const [action,setAction] = useState(null)
     const router = useRouter()
-    const { serviceType } = router.query 
+    const { serviceType } = params
     const fetcher = async (...args) => {
         const response = await axios.post(`http://localhost:3000/api/${args}`,{
             serviceType : serviceType
@@ -70,64 +82,69 @@ export default function serviceType(){
     return (
         <>  
             <Layout>
-                <div className = {styles.container}>
-                    <div className = {styles.header}>
-                        <h1 className = {styles.heading}>
-                            {serviceType}
-                        </h1>
-                        <button className = {styles.addBtn} onClick = {() => {
+                <Stack
+                direction = {'column'}
+                spacing={2}
+                className = {styles.container}
+                >   
+                    <Stack
+                    direction = {'row'}
+                    className = {styles.header}
+                    >
+                        <Typography className = {styles.heading}>{serviceType}</Typography>
+                        <IconButton className = {styles.addbtn} onClick = {() => {
                             setAction('add')
                             setModal(true)
                         }}>
                             <IoMdAdd/>
-                        </button>
-                    </div>
-                    <hr style = {{ border : "1px solid black" }}/>
-                    <table className = {styles.table}>
-                        <tbody>
-                            <tr className = {styles.tbRow}>
-                                <th className = {styles.tbHead}>S.No</th>
-                                <th className = {styles.tbHead}>Task</th>
-                                <th className = {styles.tbHead}>Hourly Wage</th>
-                                <th className = {styles.tbHead}></th>
-                                <th className = {styles.tbHead}></th>
-                            </tr>
-                            {
-                                data && data.data.map((value,index)=>{
-                                    return (
-                                    <tr key={index}>
-                                    <td className = {styles.tbData}>
-                                        {index+1}
-                                    </td>
-                                    <td className = {styles.tbData}>
-                                        {value.task}
-                                    </td>
-                                    <td className = {styles.tbData}>
-                                        {`${value.hourly_wage} PKR`}
-                                    </td>
-                                    <td className = {styles.tbData}>
-                                        <button className = {styles.editBtn} onClick = {() => {
-                                            setSelectedTask(value._id)
-                                            setTask(value.task)
-                                            setHourly(value.hourly_wage)
-                                            setAction('edit')
-                                            setModal(true)
-                                        }}>
-                                            <AiFillEdit/>
-                                        </button>
-                                    </td>
-                                    <td className = {styles.tbData}>
-                                        <button className = {styles.removeBtn} onClick = {() => del(value._id)}>
-                                            <AiFillDelete/>
-                                        </button>
-                                    </td>
-                                </tr>
-                                )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                    <Modal 
+                        </IconButton>
+                    </Stack>
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell className = {styles.tbHead}>S-NO</TableCell>
+                                    <TableCell className = {styles.tbHead}>Task</TableCell>
+                                    <TableCell className = {styles.tbHead}>Hourly Wage</TableCell>
+                                    <TableCell className = {styles.tbHead}></TableCell>
+                                    <TableCell className = {styles.tbHead}></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    data.data && data.data.map((value,index)=>{
+                                        return (
+                                            <TableRow key={value._id}>
+                                                <TableCell className = {styles.tbData}>{ index + 1 }</TableCell>
+                                                <TableCell className = {styles.tbData}>{value.task}</TableCell>
+                                                <TableCell className = {styles.tbData}>
+                                                    {`${value.hourly_wage} PKR`}
+                                                </TableCell>
+                                                <TableCell className = {styles.tbData}>
+                                                    <Button onClick = {() => {
+                                                        setSelectedTask(value._id)
+                                                        setTask(value.task)
+                                                        setHourly(value.hourly_wage)
+                                                        setAction('edit')
+                                                        setModal(true)
+                                                    }}>
+                                                        <AiFillEdit size={20} color = {'cornflowerblue'} />
+                                                    </Button>
+                                                </TableCell>
+                                                <TableCell className = {styles.tbData}>
+                                                    <Button onClick = {() => del(value._id)}>
+                                                        <AiFillDelete size={20} color = {'red'} />
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    })
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Stack>
+                <Modal 
                     isOpen = {modal}
                     onRequestClose={() => closeModal()}
                     ariaHideApp = {false}
@@ -165,8 +182,15 @@ export default function serviceType(){
                             Confirm
                         </button>
                     </Modal>
-                </div>
             </Layout>
         </>
     )
+}
+
+export function getServerSideProps(context){
+    return {
+        props : {
+            params : context.params
+        }
+    }
 }

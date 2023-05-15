@@ -1,107 +1,23 @@
-.container {
-    margin: 10px;
+ .container { 
     padding: 10px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    width : 100%;
     overflow: auto;
 }
 
-.header {
-    flex: 1;
-    font-size: larger;
-    padding: 10px;
-    text-align: center;
-    background-color: cornflowerblue;
-    font-weight: bolder;
-    font-style: italic;
-    border-radius: 10px;
-}
-
-.body {
-    flex: 18;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.img {
-    padding: 10px;
-    margin: auto;
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-
-.field {
-    border: 3px solid black;
-    margin: 10px;
-    height: fit-content;
-    padding: 10px;
-    text-align: center;
-    border-radius : 10px;
-}
 .heading {
+    flex : 1;
     text-align: center;
     font-weight: bolder;
-    font-size: x-large;
-    font-style: italic;
-}
-
-.value {
-    text-align: center;
-    margin: 10px;
-    font-style: italic;
     font-size: large;
+    background-color: cornflowerblue;
+    padding: 10px;
+
 }
 
-@media (min-width : 420px) {
-    .img {
-        grid-column-start: 1;
-        grid-column-end: 2;
-        margin: auto;
-    }
-    .body {
-        grid-template-columns: 1fr;
-    }
-    .heading {
-        font-size: medium;
-    }
-    .value {
-        font-size: small;
-    }
-    .header {
-        font-size: large;
-    }
+.userImg {
+    width : 150px;
+    height : 150px;
+    align-self: center;
+    color : cornflowerblue;
+    background-color: black;
 }
-
-@media (min-width : 600px) {
-    .img {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        margin: auto;
-    }
-    .body {
-        grid-template-columns: 1fr 1fr;
-    }
-    .heading {
-        font-size: large;
-    }
-    .value {
-        font-size: medium;
-    }
-    .header {
-        font-size: large;
-    }
-}
-
-@media (min-width : 992px) {
-    .header {
-        font-size: larger;
-    }
-    .heading {
-        font-size: x-large;
-    }
-    .value {
-        font-size: large;
-    }
-}
-

@@ -4,9 +4,11 @@ import styles from '../../../../styles/Servicemen.module.css'
 import { FaUserCircle } from 'react-icons/fa'
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from 'react-modal'
 import { useMutation } from "react-query";
+import { Avatar, Grid, Stack, Typography } from "@mui/material";
+import FieldData from "../../../../Component/FieldData";
 
 export default function servicemen(){
     const router = useRouter()
@@ -22,52 +24,51 @@ export default function servicemen(){
     
     return (
         <Layout>
-            <div className = {styles.container}>
-                <div className = {styles.header}>
-                    <p>
-                        {router.query.servicemenID}
-                    </p>
-                </div>
-                <div className = {styles.body}>
-                    <div className = {styles.img}>
+            <React.Fragment>
+                <Stack
+                direction = {'column'}
+                spacing = {2}
+                className = {styles.container}
+                >   
+                    <Stack
+                    direction={'row'}
+                    >
+                        <Typography className = {styles.heading}>{router.query.servicemenID}</Typography>
+                    </Stack>
+                    <Avatar className = {styles.userImg}>
                         <FaUserCircle 
                         size={150} 
                         style={{ cursor : 'pointer' }} 
                         onClick={ isLoading ? null : () => setShowPic(true)}/>
-                    </div>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>First Name</legend>
-                        <p className = {styles.value}>{router.query.firstname}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Last Name</legend>
-                        <p className = {styles.value}>{router.query.lastname}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>CNIC</legend>
-                        <p className = {styles.value}>{router.query.cnic}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Contact</legend>
-                        <p className = {styles.value}>{router.query.contact}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Work Experience</legend>
-                        <p className = {styles.value}>{`${router.query.experience} Year/s`}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Service Type</legend>
-                        <p className = {styles.value}>{router.query.serviceType}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Email Address</legend>
-                        <p className = {styles.value}>{router.query.email}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Date of Registration</legend>
-                        <p className = {styles.value}>{router.query.registration_date}</p>
-                    </fieldset>
-                </div>
+                    </Avatar>
+                    
+                    <Grid container>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'First-Name'} value = {router.query.firstname}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Last-Name'} value = {router.query.lastname}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Service Type'} value = {router.query.serviceType}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Work Experience'} value = {`${router.query.experience} Year/s`}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'CNIC'} value = {router.query.cnic}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Contact'} value = {router.query.contact}/>
+                        </Grid>
+                        <Grid lg = {6} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Email Address'} value = {router.query.email}/>
+                        </Grid>
+                        <Grid lg = {6} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Date of Registration'} value = {router.query.registration_date}/>
+                        </Grid>
+                    </Grid>
+                </Stack>
                 <Modal
                 isOpen = {showPic}
                 onRequestClose={() => setShowPic(false)}
@@ -94,7 +95,7 @@ export default function servicemen(){
                         </p>
                     }
                 </Modal>
-            </div>
+            </React.Fragment>
         </Layout>
     )
 }

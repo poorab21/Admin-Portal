@@ -3,6 +3,9 @@ import styles from '../../../../../styles/OneOff.module.css'
 import Layout from "../../../../../Component/Layout"
 import FieldData from "../../../../../Component/FieldData"
 import clsx from "clsx"
+import React from "react"
+import { Grid, Table , Stack, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+
 
 export default function Transaction(){
     const router = useRouter()
@@ -24,31 +27,31 @@ export default function Transaction(){
         if(TOC.length > 0) {
             return TOC.map((value,index)=>{
                 return (
-                    <tr key = {index} className = {styles.tbRow}>
-                        <td className = {styles.tbData}>{index+1}</td>
-                        <td className = {styles.tbData}>{value.condition}</td>
-                        <td className = {styles.tbData}>
-                            <p className = {clsx({
+                    <TableRow key = {index}>
+                        <TableCell className = {styles.tbData}>{index+1}</TableCell>
+                        <TableCell className = {styles.tbData}>{value.condition}</TableCell>
+                        <TableCell className = {styles.tbData}>
+                            <Typography className = {clsx({
                             [styles.LOWpriority] : value.priority === 'LOW' ,
                             [styles.MEDIUMpriority] : value.priority === 'MEDIUM' ,
                             [styles.HIGHpriority] : value.priority === 'HIGH' ,
                             })}>
                             {value.priority}
-                            </p>
-                        </td>
-                    </tr>
+                            </Typography>
+                        </TableCell>
+                    </TableRow>
                 )
             })
         }
         else {
             return (
-                <tr className = {styles.tbRow}>
-                    <td colSpan={3}>
+                <TableRow>
+                    <TableCell colSpan={3}>
                         <center>
                             No Conditions set by Customer
                         </center>
-                    </td>
-                </tr>
+                    </TableCell>
+                </TableRow>
             )
         }
     }
@@ -57,82 +60,99 @@ export default function Transaction(){
     return (
         <>
             <Layout>
-                <div className = {styles.container}>
-                    <div className = {styles.header}>
-                        <p className = {styles.transactionID}>{_id}</p>
-                    </div>
-                    <div className = {styles.info}>
-                        <div className = {styles.leftSide}>
-                            <div style = {{ display : 'flex' , flex : 1 }}>
+                <React.Fragment>
+                    <Stack
+                    direction = {'column'}
+                    spacing = {2}
+                    className = {styles.container}
+                    >
+                        <Stack
+                        direction={'row'}
+                        className = {styles.header}
+                        >
+                            <Typography className = {styles.heading}>{_id}</Typography>
+                        </Stack>
+                        <Grid justifyContent={'center'} alignItems={'center'} container>
+                            <Grid lg = {2} md = {3} sm = {6} xs = {12} item>
                                 <FieldData 
                                 field = {'Start Date'} 
                                 value = {`${
                                     (new Date(start_date)).getDate()
-                                    } ${month[(new Date(start_date)).getMonth()]} ${(new Date(start_date)).getFullYear()}`}/>
-                            </div>
-                            <div style = {{ display : 'flex' , flex : 1 }}>
-                                <FieldData field = {'Start Time'} value = {start_time}/>
-                            </div>
-                            <div style = {{ display : 'flex' , flex : 1 }}>
+                                    } ${month[(new Date(start_date)).getMonth()]} ${(new Date(start_date)).getFullYear()} ${start_time}`}/>
+                            </Grid>
+                            <Grid lg = {2} md = {3} sm = {6} xs = {12} item>
                                 <FieldData field = {'Service Type'} value = {serviceType}/>
-                            </div>
-                            <div style = {{ display : 'flex' , flex : 1 }}>
+                            </Grid>
+                            <Grid lg = {2} md = {3} sm = {6} xs = {12} item>
                                 <FieldData field = {'Customer'} value = {customer}/>
-                            </div>
-                            <div style = {{ display : 'flex' , flex : 1 }}>
+                            </Grid>
+                            <Grid lg = {2} md = {3} sm = {6} xs = {12} item>
                                 <FieldData field = {'Servicemen'} value = {provider}/>
-                            </div>
-                            <div style = {{ display : 'flex' , flex : 1 }}>
-                                <FieldData field = {'Service Location'} value = {location}/>
-                            </div>
-                        </div>
-                        <div className = {styles.rightSide}>
-                            <table className = {styles.tasklist}>
-                                <tbody>
-                                    <tr className = {styles.tbRow}>
-                                        <th className = {styles.tbHead}>S.NO</th>
-                                        <th className = {styles.tbHead}>Task</th>
-                                        <th className = {styles.tbHead}>Hourly Wage</th>
-                                        <th className = {styles.tbHead}>Duration</th>
-                                    </tr>
-                                    {
-                                        TaskList && (JSON.parse(TaskList)).map((value,index)=>{
-                                            return (
-                                                <tr className = {styles.tbRow} key={index}>
-                                                    <td className = {styles.tbData}>{index+1}</td>
-                                                    <td className = {styles.tbData}>{value.task}</td>
-                                                    <td className = {styles.tbData}>{`${value.hourly_price}/PKR`}</td>
-                                                    <td className = {styles.tbData}>{`${value.duration}/min`}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                    <tr className = {styles.total}>
-                                        <td className = {styles.tbData}></td>
-                                        <td className = {styles.tbData}></td>
-                                        <td className = {styles.tbData}>
-                                            {`${amount} PKR`}
-                                        </td>
-                                        <td className = {styles.tbData}>{`${duration}/min`}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table className = {styles.conditionList}>
-                                <tbody>
-                                    <tr className = {styles.tbRow}>
-                                        <th className = {styles.tbHead}>S.NO</th>
-                                        <th className = {styles.tbHead}>Condition</th>
-                                        <th className = {styles.tbHead}>Priority</th>
-                                    </tr>
+                            </Grid>
+                            <Grid lg = {4} md = {12} sm = {12} xs = {12} item>
+                                <FieldData field = {'Service Location'} value = {'House 109/1 Phase 7 Khy-e-rahat 6th Lane Defence Karachi'}/>
+                            </Grid>
+                        </Grid>
+                        <Stack
+                        direction = {'column'}
+                        spacing = {2}
+                        className = {styles.tbContainer}
+                        >
+                            <TableContainer>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell className = {styles.tbHead}>S-NO</TableCell>
+                                            <TableCell className = {styles.tbHead}>Task</TableCell>
+                                            <TableCell className = {styles.tbHead}>Hourly Wage</TableCell>
+                                            <TableCell className = {styles.tbHead}>Duration</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {
+                                            TaskList && (JSON.parse(TaskList)).map((value,index)=>{
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell className = {styles.tbData}>{index + 1}</TableCell>
+                                                        <TableCell className = {styles.tbData}>{value.task}</TableCell>
+                                                        <TableCell className = {styles.tbData}>{`${value.hourly_price}/PKR`}</TableCell>
+                                                        <TableCell className = {styles.tbData}>{`${value.duration}/min`}</TableCell>
+                                                    </TableRow>
+                                                )
+                                            })
+                                        }
+                                        <TableRow style={{ backgroundColor : 'cornflowerblue' }}>
+                                           <TableCell className = {styles.tbData}></TableCell>
+                                            <TableCell className = {styles.tbData}></TableCell>
+                                            <TableCell style = {{ fontWeight : 'bold' }} className = {styles.tbData}>
+                                             {`${amount} PKR`}
+                                            </TableCell>
+                                            <TableCell style = {{ fontWeight : 'bold' }} className = {styles.tbData}>
+                                                {`${duration}/min`}
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <TableContainer>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell className = {styles.tbHead}>S-NO</TableCell>
+                                            <TableCell className = {styles.tbHead}>Condition</TableCell>
+                                            <TableCell className = {styles.tbHead}>Priority</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
                                     {
                                         TOC && Conditions(JSON.parse(TOC))
                                     }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Stack>
+                    </Stack>
+                </React.Fragment>                
             </Layout>
         </>
     )

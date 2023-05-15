@@ -1,140 +1,63 @@
 .container {
     width: 100%;
-    margin: 10px;
-    flex-direction: column;
-    display: flex;
     overflow: auto;
+    padding: 10px;
 }
 
 .header {
-    border: 1px solid black;
     padding: 10px;
+    justify-content: center;
+    background-color: cornflowerblue;
+}
+
+.heading {
+    font-weight: bolder;
+    font-size: large;
+}
+
+.contentContainer {
+    flex: 1;
+}
+
+.tbContainer {
+    flex: 1;
+}
+
+.tbHead {
     text-align: center;
     background-color: cornflowerblue;
-    font-weight: bolder;
-    overflow-wrap: break-word;
     font-size: medium;
-    font-style: italic;
-    flex: 1;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-    flex: 17;
-}
-
-
-.leftSide {
-    flex: 1;   
-}
-
-.rightSide {
-    display: flex;
-    flex : 2;
-    padding: 10px;
-    flex-direction: column;
-}
-
-.tasklist {
-    border: 1px solid black;
-    flex: 1;
+    font-weight: bolder;
 }
 
 .tbData {
     text-align: center;
-    font-style: italic;
-    font-size: small;
-    padding: 10px;
-}
-
-.tbHead {
-    border: 1px solid black;
-    background-color: cornflowerblue;
-    font-style: italic;
-    font-size: medium;
-}
-
-.total {
-    background-color: cornflowerblue;
-    font-style: italic;
-    font-weight: bold;
 }
 
 .LOWpriority {
     border: 1px solid black;
-    width: fit-content;
-    padding: 10px;
     border-radius: 10px;
-    margin: auto;
+    width: fit-content;
     font-weight: bold;
     background-color: lime;
+    margin: auto;
 }
 
 .MEDIUMpriority{
     border: 1px solid black;
-    width: fit-content;
-    padding: 10px;
     border-radius: 10px;
-    margin: auto;
     font-weight: bold;
+    width: fit-content;
     background-color: yellow;
+    margin: auto;
 }
 
 .HIGHpriority {
     border: 1px solid black;
-    width: fit-content;
-    padding: 10px;
     border-radius: 10px;
-    margin: auto;
     font-weight: bold;
+    width: fit-content;
+    padding: 0px 10px;
     background-color: red;
-}
-
-.conditionList {
-    border: 1px solid black;
-    margin-top: 10px;
-    flex: 1;
-}
-
-@media (min-width : 740px) {
-    .tbData {
-        font-size: small;
-    }
-    
-    .tbHead {
-        font-size: medium;
-    }
-    .header {
-        font-size: large;
-    }
-    .info {
-        flex-direction: row;
-    }
-}
-
-@media (min-width : 810px) {
-    .tbData {
-        font-size: medium;
-    }
-    
-    .tbHead {
-        font-size: large;
-    }
-    .header {
-        font-size: x-large;
-    }
-}
-
-@media (min-width : 992px) {
-    .tbData {
-        font-size: large;
-    }
-    
-    .tbHead {
-        font-size: x-large;
-    }
-    .header {
-        font-size: xx-large;
-    }
+    margin: auto;
 }

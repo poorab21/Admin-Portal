@@ -12,6 +12,7 @@ import { BsFillCalendarDateFill , BsFillArrowLeftCircleFill , BsFillArrowRightCi
 import Calendar from 'react-calendar'
 import { checkCookie } from '../../../Component/checkCookie'
 import { useRouter } from 'next/router'
+import { Button, MenuItem, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 
 export default function Transactions(){
     const [type,setType] = useState('One-Off')
@@ -54,7 +55,180 @@ export default function Transactions(){
     )
     return (
         <Layout>
-            <div className = {styles.container}>
+            <Stack
+            direction = {'column'}
+            spacing = {2}
+            className = {styles.container}
+            >
+                <Stack
+                direction={'row'}
+                className = {styles.header}
+                >
+                    <Select value={status} onChange={(e) => { setStatus(e.target.value) ; }}>
+                        <MenuItem value = {'In-Progress'}>In-Progress</MenuItem>
+                        <MenuItem value = {'Requested'}>Requested</MenuItem>
+                        <MenuItem value = {'Completed'}>Completed</MenuItem>
+                    </Select>
+                    <Typography className = {styles.heading}>Transactions</Typography>
+                    <Select value={type} onChange={(e) => { setType(e.target.value) ; }}>
+                        <MenuItem value = {'One-Off'}>One-Off</MenuItem>
+                        <MenuItem value = {'Contract'}>Contract</MenuItem>
+                    </Select>
+                </Stack>
+                {  
+                    status === 'Completed' ? (
+                        <div className = {styles.filterContainer} onClick = {() => setOpenCalendar(true)}>
+                            <span>
+                                <BsFillCalendarDateFill size={20}/>
+                            </span>
+                            <span 
+                            id = "date"
+                            style = {{ marginLeft : '10px' , fontWeight : 'bold' , fontStyle : 'italic' , fontSize : 'medium' }}>
+                                {`${date.getDate()} ${Months[date.getMonth()]} ${date.getFullYear()}`}
+                            </span>
+                        </div>
+                    ) : null
+                }
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className = {styles.tbHead}>
+                                    { status === 'Requested' ? 'S.NO' : 'Transaction ID' }
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}>
+                                    Service Type
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}>
+                                    Customer
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}>
+                                    { status === 'Requested' ? 'Offers of Service' : 'Servicemen' }
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                data && data.map((value,index)=>{
+                                    return (
+                                        <TableRow key = {value._id}>
+                                            <TableCell className = {styles.tbData}>
+                                                { getID(value,index) }
+                                            </TableCell>
+                                            <TableCell className = {styles.tbData}>
+                                                { status === 'Completed' ? value.service_type : value.serviceType }
+                                            </TableCell>
+                                            <TableCell className = {styles.tbData}>
+                                                {` ${value.customer[0].firstname} ${value.customer[0].lastname} `}
+                                            </TableCell>
+                                            <TableCell className = {styles.tbData}>
+                                            { 
+                                            status === 'Requested' ? 
+                                            <Button
+                                            disabled = { value.requestees.length > 0 ? false : true  }
+                                            className = {styles.viewBtn} 
+                                            onClick = {() => { 
+                                                setRequestees(value.requestees);
+                                                setOpenModal(true)
+                                            }}
+                                            >
+                                                View
+                                            </Button> 
+                                            : 
+                                            `${value.provider[0].firstname} ${value.provider[0].lastname}` 
+                                            }
+                                            </TableCell>
+                                            <TableCell className = {styles.tbData}>
+                                                <center style = {{ cursor : 'pointer' }}>
+                                                    <Link href = {{
+                                                        pathname : `Transactions/${status}/${type}/${getID(value,index)}` ,
+                                                        query : { 
+                                                        ...value ,
+                                                        customer : `${value.customer[0].firstname} ${value.customer[0].lastname}` ,
+                                                        provider : `${value.provider[0]?.firstname} ${value.provider[0]?.lastname}`,
+                                                        TaskList : JSON.stringify(value.TaskList) ,
+                                                        TOC : JSON.stringify(value.TOC) ,
+                                                        Ratings : JSON.stringify(value.Ratings)
+                                                        }
+                                                    }
+                                                    }>
+                                                        <HiInformationCircle 
+                                                        size = {25} 
+                                                        color = {'cornflowerblue'}
+                                                        onMouseOver = {(e) => e.target.setAttribute('color','black') }
+                                                        onMouseOut = { (e) => e.target.setAttribute('color','cornflowerblue')}
+                                                        />
+                                                    </Link>
+                                                </center>
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Stack>        
+
+            <Modal
+                isOpen = {openModal}
+                onRequestClose={() => setOpenModal(false)}
+                ariaHideApp = {false}
+                style={{
+                    content : {
+                        margin : 'auto' ,
+                        height : '200px' ,
+                        width : '300px'
+                    }
+                }}
+                >
+                    {
+                        requestees.map((value,index)=>{
+                            return (
+                            <div key={index} className = {styles.requestee}>
+                                <div>
+                                    <BiUserCircle size={80} color = {'white'}/>
+                                </div>
+                                <div>
+                                    <p className = {styles.requesteeName}>{value.firstname + ' ' + value.lastname}</p>
+                                    <p className = {styles.contactInfo}>{value.email}</p>
+                                    <p className = {styles.contactInfo}>{value.contact}</p>
+                                </div>
+                            </div>
+                            ) 
+                        })
+                    }
+            </Modal>
+            <Modal
+            isOpen = {openCalendar}
+            ariaHideApp = {false}
+            style={{
+                content : {
+                    width: "fit-content",
+                    height: "fit-content",
+                    margin: "auto"
+                }
+            }}
+            onRequestClose={() => setOpenCalendar(false)}
+            >
+                <Calendar
+                tileClassName = {styles.tile}
+                className = {styles.calendar}
+                defaultValue={date}
+                view = {'month'}
+                prev2Label = {<BsFillArrowLeftCircleFill/>}
+                next2Label = {<BsFillArrowRightCircleFill/>}
+                nextLabel = {<BsFillArrowRightCircleFill/>}
+                prevLabel = {<BsFillArrowLeftCircleFill/>}
+                onClickDay={(date) => { setDate(date) ; setOpenCalendar(false) } } 
+                />
+            </Modal>
+        </Layout>
+    )
+}
+
+{/* <div className = {styles.container}>
                 <div className = {styles.header}>
                     <select className = {styles.filter} value={status} onChange={(e) => { setStatus(e.target.value) ; }}>
                         <option>In-Progress</option>
@@ -211,7 +385,4 @@ export default function Transactions(){
                     onClickDay={(date) => { setDate(date) ; setOpenCalendar(false) } } 
                     />
                 </Modal>
-            </div>
-        </Layout>
-    )
-}
+            </div> */}

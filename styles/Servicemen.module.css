@@ -1,107 +1,23 @@
-.container {
-    display: flex;
-    width: 100%;
-    margin: 10px;
+.container { 
     padding: 10px;
-    flex-direction: column;
+    width : 100%;
     overflow: auto;
 }
 
-.header {
-    background-color: cornflowerblue;
-    flex: 1;
-    height: fit-content;
-    font-size: x-large;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bolder;
-    font-style: italic;
-}
-
-.body {
-    flex: 18;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.field {
-    border: 3px solid black;
-    margin: 10px;
-    border-radius : 10px;
-}
 .heading {
+    flex : 1;
     text-align: center;
     font-weight: bolder;
-    font-size: x-large;
-    font-style: italic;
-}
-
-.img {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    margin: auto;
-}
-
-.value {
-    text-align: center;
-    margin: 10px;
-    font-style: italic;
     font-size: large;
+    background-color: cornflowerblue;
+    padding: 10px;
+
 }
 
-@media (min-width : 120px) {
-    .img {
-        grid-column-start: 1;
-        grid-column-end: 2;
-        margin: auto;
-    }
-    .body {
-        grid-template-columns: 1fr;
-    }
-    .heading {
-        font-size: medium;
-    }
-    .value {
-        font-size: small;
-    }
-    .header {
-        font-size: large;
-    }
-}
-
-@media (min-width : 600px) {
-    .img {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        margin: auto;
-    }
-    .body {
-        grid-template-columns: 1fr 1fr;
-    }
-    .heading {
-        font-size: large;
-    }
-    .value {
-        font-size: medium;
-    }
-    .header {
-        font-size: large;
-    }
-}
-
-@media (min-width : 992px) {
-    .body {
-        grid-template-columns: 1fr 1fr;
-    }
-    .heading {
-        font-size: x-large;
-    }
-    .value {
-        font-size: large;
-    }
-    .header {
-        font-size: x-large;
-    }
+.userImg {
+    width : 150px;
+    height : 150px;
+    align-self: center;
+    color : cornflowerblue;
+    background-color: black;
 }
