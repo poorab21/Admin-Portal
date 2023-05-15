@@ -1,71 +1,37 @@
 .container {
-    display: flex;
     width: 100%;
     padding: 10px;
-    margin: 0px;
-    flex: 1;
-    flex-direction: column;
     overflow: auto;
 }
 
 .header {
-    background-color: cornflowerblue;
-    padding: 10px;
-    border-radius: 10px;
-    justify-content: center;
-    flex: 1;
-    display: flex;
-}
-
-.applicantName {
-    text-align: center;
-    font-weight: bolder;
-    font-size: 25px;
-    flex: 1;
-    font-style: italic;
-}
-
-.referenceIcon {
-    margin: auto;
-    cursor: pointer;
-}
-
-.applicant {
-    display: flex;
-    flex: 5;
-    justify-content: center;
-    align-items: center;
     padding: 10px;
 }
 
-.application {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.field {
-    border: 3px solid black;
-    margin: 10px;
-    flex : 1;
-    border-radius : 10px;
-}
 .heading {
-    text-align: center;
     font-weight: bolder;
-    font-size: 25px;
-    font-style: italic;
-}
-.value {
+    font-size: x-large;
     text-align: center;
-    margin: 10px;
-    font-style: italic;
+    flex: 1;
+}
+
+.refBtn {
+    border: 1px solid black;
+    background-color: cornflowerblue;
+}
+
+.refBtn:hover {
+    background-color: black;
 }
 
 .references {
     display: flex;
     flex: 1;
     flex-direction: column;
+}
+
+.refInfo {
+    flex: 3;
 }
 
 .reference {
@@ -78,14 +44,8 @@
     background-color: cornflowerblue;
 }
 
-.refInfo {
-    flex: 3;
-}
-
-@media (min-width : 600px) {
-    .application {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
+.imgContainer {
+    width : 150px;
+    height: 150px;
+    align-self: center;
 }

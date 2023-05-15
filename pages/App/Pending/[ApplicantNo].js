@@ -4,16 +4,17 @@ import styles from '../../../styles/Applicant.module.css'
 import { FaUserCircle } from 'react-icons/fa'
 import { VscReferences } from 'react-icons/vsc'
 import Modal  from 'react-modal'
-import { useState } from "react";
-import useSWR from 'swr'
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useMutation } from "react-query";
+import { Avatar , Grid, IconButton, Stack, Typography } from "@mui/material";
+import FieldData from "../../../Component/FieldData";
+import { mutate } from "swr";
 
 export default function Applicant(){
     const router = useRouter()
     const { 
-        id ,
         firstname , 
         lastname ,
         email ,
@@ -27,62 +28,68 @@ export default function Applicant(){
     let References = references && JSON.parse(references)
     const [showRef,setShowRef] = useState(false)
     const [showPic,setShowPic] = useState(false)
-    
-    const { data : userImg , isLoading } = useMutation((data)=>{
+
+    const { data : userImg , isLoading , mutate } = useMutation((data)=>{
         return axios.post('http://localhost:3000/api/Pending/userImg',data)
     })
-    
+    useEffect(()=>{
+         router.isReady ?  mutate({ servicemenID : router.query.id }) : null
+    },[router.isReady])
+
     return (
         <Layout>
-            <div className = {styles.container}>
-                <div className = {styles.header}>
-                    <p className = {styles.applicantName}>
-                        {`Applicant #${router.query.ApplicantNo}`}
-                    </p>
-                    <p className = {styles.referenceIcon}>
-                        <VscReferences onClick={() => setShowRef(true)} size={30}/>
-                    </p>
-                </div>
-                <div className = {styles.applicant}>
-                    <FaUserCircle 
-                    size={150} 
-                    style={{ cursor : 'pointer' }} 
-                    onClick={ isLoading ? null : () => setShowPic(true)}/>
-                </div>
-                <div className = {styles.application}>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>First Name</legend>
-                        <p className = {styles.value}>{firstname}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Last Name</legend>
-                        <p className = {styles.value}>{lastname}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Applied as</legend>
-                        <p className = {styles.value}>{serviceType}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Experience</legend>
-                        <p className = {styles.value}>{`${experience} Year/s`}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>CNIC</legend>
-                        <p className = {styles.value}>{cnic}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Contact</legend>
-                        <p className = {styles.value}>{contact}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Email Address</legend>
-                        <p className = {styles.value}>{email}</p>
-                    </fieldset>
-                    <fieldset className = {styles.field}>
-                        <legend className = {styles.heading}>Submission Date</legend>
-                        <p className = {styles.value}>{registration_date}</p>
-                    </fieldset>
-                </div>
+            <React.Fragment>
+                <Stack
+                direction = {'column'}
+                spacing = {2}
+                className = {styles.container}
+                >
+                    <Stack
+                    direction={'row'}
+                    className = {styles.header}
+                    alignItems={'center'}
+                    >
+                        <Typography className = {styles.heading}>{`Applicant #${router.query.ApplicantNo}`}</Typography>
+                        <IconButton className = {styles.refBtn} onClick={() => setShowRef(true)}>
+                            <VscReferences color = {'white'} size={30}/>
+                        </IconButton>
+                    </Stack>
+
+                    <Avatar className = {styles.imgContainer} onClick={ isLoading ? null : () => setShowPic(true)} variant="round">
+                        <FaUserCircle 
+                        size={150}
+                        color = {'cornflowerblue'}
+                        style={{ cursor : 'pointer' , backgroundColor : 'white' }} 
+                        />
+                    </Avatar>
+
+                    <Grid container>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'First-Name'} value = {firstname}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Last-Name'} value = {lastname}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Applied as'} value = {serviceType}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Experience'} value = {`${experience} Year/s`}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'CNIC'} value = {cnic}/>
+                        </Grid>
+                        <Grid lg = {4} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Contact'} value = {contact}/>
+                        </Grid>
+                        <Grid lg = {6} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Email Address'} value = {email}/>
+                        </Grid>
+                        <Grid lg = {6} md = {6} sm = {6} xs = {12} item>
+                            <FieldData field = {'Date of Submission'} value = {registration_date}/>
+                        </Grid>
+                    </Grid>
+                </Stack>
                 <Modal
                 isOpen = {showRef}
                 onRequestClose={() => setShowRef(false)}
@@ -133,7 +140,7 @@ export default function Applicant(){
                 style={{
                     content : {
                         margin : 'auto' ,
-                        height : '400px' ,
+                        height : '380px' ,
                         width : '350px'
                     }
                 }}
@@ -153,7 +160,7 @@ export default function Applicant(){
                         </p>
                     }
                 </Modal>
-            </div>
+            </React.Fragment>        
         </Layout>
     )
 }
