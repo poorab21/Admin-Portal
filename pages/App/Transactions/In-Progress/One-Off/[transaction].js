@@ -112,7 +112,7 @@ export default function Transaction(){
                                         {
                                             TaskList && (JSON.parse(TaskList)).map((value,index)=>{
                                                 return (
-                                                    <TableRow>
+                                                    <TableRow key = {value._id}>
                                                         <TableCell className = {styles.tbData}>{index + 1}</TableCell>
                                                         <TableCell className = {styles.tbData}>{value.task}</TableCell>
                                                         <TableCell className = {styles.tbData}>{`${value.hourly_price}/PKR`}</TableCell>

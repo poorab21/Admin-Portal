@@ -3,79 +3,75 @@ import Layout from "../../../../../Component/Layout";
 import styles from '../../../../../styles/Completed.module.css'
 import FieldData from '../../../../../Component/FieldData'
 import ReactStarsRating from 'react-awesome-stars-rating';
+import { Grid, Stack, Typography } from "@mui/material";
 
 export default function Completed(){
     const router = useRouter()
     const started = new Date(router.query.started)
     const ended = new Date(router.query.ended)
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    let ratings = JSON.parse(router.query.Ratings)
+    let ratings = router.query.Ratings && JSON.parse(router.query.Ratings)
     return (
         <Layout>
-            <div className = {styles.container}>
-                <div className = {styles.header}>
-                    <p className = {styles.transactionID}>
-                        {router.query.transaction_id}
-                    </p>
-                </div>
-                <hr/>
-                <div className = {styles.infoContainer}>
-                    <div className = {styles.row}>
-                        <FieldData 
-                        field = {'Customer'} 
-                        value = {router.query.customer} />
-                        <FieldData 
-                        field = {'Servicemen'} 
-                        value = {router.query.provider} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData 
-                        field = {'Service Type'} 
-                        value = {router.query.service_type} />
-                        <FieldData 
-                        field = {'Nature'} 
-                        value = {router.query.transaction_type} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData
-                        field = {'Service Location'}
-                        value = {router.query.service_location}
-                        />
+            <Stack
+            direction = {'column'}
+            spacing = {2}
+            className = {styles.container}
+            >
+                <Typography className = {styles.heading}>{router.query.transaction_id}</Typography>
+                <Grid container>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Customer'} value = {router.query.customer} />
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Servicemen'} value = {router.query.provider} />
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Service Type'} value = {router.query.service_type} />
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Nature'} value = {router.query.transaction_type} />
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
                         <FieldData
                         field = {'Time Period'}
                         value = {
-                            `${started.getDate()} ${Months[started.getMonth()]} ${started.getFullYear()} -
-                            ${ended.getDate()} ${Months[ended.getMonth()]} ${ended.getFullYear()}
-                            `}
+                        `${started.getDate()} ${Months[started.getMonth()]} ${started.getFullYear()} -
+                        ${ended.getDate()} ${Months[ended.getMonth()]} ${ended.getFullYear()}
+                        `}
                         />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData 
-                        field = {'Monthly Wage'} 
-                        value = {`${router.query.generated_Amount} PKR`} />
-                        <FieldData 
-                        field = {'Duration'} 
-                        value = {`${router.query.Duration} Month/s`} />
-                        <FieldData 
-                        field = {'Payment Method'} 
-                        value = {router.query.paymentMethod} />
-                    </div>
-                        <div className = {styles.feedbackbox}>
-                            <div style = {{ border : '1px solid black' , width : '100%' , backgroundColor : 'cornflowerblue' }}>    
-                                <ReactStarsRating 
-                                    isHalf = {true} 
-                                    isEdit = {false} 
-                                    size = {30} 
-                                    primaryColor = {'orange'}
-                                    count = {5}
-                                    starGap = {4} 
-                                    className = {styles.ratingbox}
-                                    value = {Number(ratings['$numberDecimal'])} />
-                            </div>
-                            <p className = {styles.feedback}>{router.query.feedback}</p>
-                        </div>
-                    </div>
-                </div>
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Monthly Wage'} value = {`${router.query.generated_Amount} PKR`} />
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Duration'} value = {`${router.query.Duration} Month/s`} />
+                    </Grid>
+                    <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
+                        <FieldData field = {'Payment Method'} value = {router.query.paymentMethod} />
+                    </Grid>
+                    <Grid lg = {12} md = {12} sm = {12} xs = {12} item>
+                        <FieldData field = {'Service Location'} value = {router.query.service_location} />
+                    </Grid>
+                    <Grid lg = {12} md = {12} sm = {12} xs = {12} item>
+                        <Stack
+                        direction={'column'}
+                        className = {styles.feedbackBox}
+                        >
+                            <ReactStarsRating 
+                            isHalf = {true} 
+                            isEdit = {false} 
+                            size = {30} 
+                            primaryColor = {'orange'}
+                            count = {5}
+                            starGap = {4} 
+                            className = {styles.ratingbox}
+                            value = { router.query.Ratings ? Number(ratings['$numberDecimal']) : 0} />
+                            <Typography className = {styles.feedback}>{router.query.feedback}</Typography>
+                        </Stack>
+                    </Grid>
+                </Grid>
+            </Stack>
         </Layout>
     )
 }

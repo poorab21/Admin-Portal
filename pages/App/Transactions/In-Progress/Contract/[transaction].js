@@ -4,6 +4,8 @@ import styles from '../../../../../styles/Contract.module.css'
 import FieldData from "../../../../../Component/FieldData"
 import clsx from "clsx"
 import moment from 'moment/moment'
+import React from 'react'
+import { Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 
 export default function Transaction(){
     const router = useRouter()
@@ -27,31 +29,31 @@ export default function Transaction(){
         if(TOC.length > 0) {
             return TOC.map((value,index)=>{
                 return (
-                    <tr key = {index} className = {styles.tbRow}>
-                        <td className = {styles.tbData}>{index+1}</td>
-                        <td className = {styles.tbData}>{value.condition}</td>
-                        <td className = {styles.tbData}>
-                            <p className = {clsx({
+                    <TableRow key = {value._id}>
+                        <TableCell className = {styles.tbData}>{index+1}</TableCell>
+                        <TableCell className = {styles.tbData}>{value.condition}</TableCell>
+                        <TableCell className = {styles.tbData}>
+                            <Typography className = {clsx({
                             [styles.LOWpriority] : value.priority === 'LOW' ,
                             [styles.MEDIUMpriority] : value.priority === 'MEDIUM' ,
                             [styles.HIGHpriority] : value.priority === 'HIGH' ,
                             })}>
                             {value.priority}
-                            </p>
-                        </td>
-                    </tr>
+                            </Typography>
+                        </TableCell>
+                    </TableRow>
                 )
             })
         }
         else {
             return (
-                <tr className = {styles.tbRow}>
-                    <td colSpan={3}>
+                <TableRow>
+                    <TableCell colSpan={3}>
                         <center>
                             No Conditions set by Customer
                         </center>
-                    </td>
-                </tr>
+                    </TableCell>
+                </TableRow>
             )
         }
     }
@@ -59,49 +61,57 @@ export default function Transaction(){
     return (
         <>
             <Layout>
-            <div className = {styles.container}>
-                <div className = {styles.header}>
-                    <p className = {styles.transactionID}>{_id}</p>
-                </div>
-                <div className = {styles.info}>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Contract Duration'} value = {`${
-                            (new Date(start_date)).getDate()} ${month[(new Date(start_date)).getMonth()]} ${
-                                (new Date(start_date)).getFullYear()} - ${endDate.getDate()} ${
-                                  month[endDate.getMonth()]} ${ endDate.getFullYear() }`} />
-                        <FieldData field = {'Work Hours'} value = {`${start_hour} - ${end_hours}`} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Montly Wage'} value = {`${montly_wage} PKR`} />
-                        <FieldData field = {'Service Type'} value = {serviceType} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Customer'} value = {customer} />
-                        <FieldData field = {'Serviceman'} value = {provider} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Service Location'} value = {location} /> 
-                    </div>
-                    <table className = {styles.conditionList}>
-                        <tbody>
-                            <tr>
-                                <th className = {styles.tbHead}>
-                                    S.NO
-                                </th>
-                                <th className = {styles.tbHead}>
-                                    Condition
-                                </th>
-                                <th className = {styles.tbHead}>
-                                    Priority
-                                </th>
-                            </tr>
-                            {
-                                TOC && Conditions(JSON.parse(TOC))
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                <React.Fragment>
+                    <Stack
+                    direction = {'column'}
+                    spacing = {2}
+                    className = {styles.container}
+                    >   
+                        <Typography className = {styles.heading}>{_id}</Typography>
+                        <Grid className = {styles.userInfo} container>
+                            <Grid lg = {4} md = {4} sm = {6} xs = {12} item>
+                                <FieldData field = {'Contract Duration'} value = {`${
+                                    (new Date(start_date)).getDate()} ${month[(new Date(start_date)).getMonth()]} ${
+                                    (new Date(start_date)).getFullYear()} - ${endDate.getDate()} ${
+                                    month[endDate.getMonth()]} ${ endDate.getFullYear() }`} />
+                            </Grid>
+                            <Grid lg = {4} md = {4} sm = {6} xs = {12} item>
+                                <FieldData field = {'Work Hours'} value = {`${start_hour} - ${end_hours}`} />
+                            </Grid>
+                            <Grid lg = {4} md = {4} sm = {6} xs = {12} item>
+                                <FieldData field = {'Monthly Wage'} value = {`${montly_wage} PKR`} />
+                            </Grid>
+                            <Grid lg = {4} md = {4} sm = {6} xs = {12} item>
+                                <FieldData field = {'Service Type'} value = {serviceType} />
+                            </Grid>
+                            <Grid lg = {4} md = {4} sm = {6} xs = {12} item>
+                                <FieldData field = {'Customer'} value = {customer} />
+                            </Grid>
+                            <Grid lg = {4} md = {4} sm = {6} xs = {12} item>
+                                <FieldData field = {'Serviceman'} value = {provider} />
+                            </Grid>
+                            <Grid lg = {12} md = {12} sm = {12}  xs = {12} item>
+                                <FieldData field = {'Service Location'} value = {location} /> 
+                            </Grid>
+                        </Grid>
+                        <TableContainer className = {styles.tb}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell className = {styles.tbHead}>S-NO</TableCell>
+                                        <TableCell className = {styles.tbHead}>Condition</TableCell>
+                                        <TableCell className = {styles.tbHead}>Priority</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {
+                                        TOC && Conditions(JSON.parse(TOC))
+                                    }
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Stack>
+                </React.Fragment>
             </Layout>
         </>
     )
