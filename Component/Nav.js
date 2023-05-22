@@ -120,7 +120,7 @@ export default function Nav(){
                                     <BiPhoneCall/>
                                 </span>
                                 <span className = {name}>
-                                    Complaints
+                                    Grievances
                                 </span>
                             </Link>
                         </li>

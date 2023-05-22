@@ -47,7 +47,7 @@ export default function Complaints(){
                 spacing={2} 
                 className = {styles.container}>
                     <Stack direction={'row'} className = {styles.header}>
-                        <Typography className = {styles.heading}>Complaints</Typography>
+                        <Typography className = {styles.heading}>Grievances</Typography>
                         <Select 
                         className = {styles.filter} 
                         label = {'User Type'} 
@@ -79,7 +79,7 @@ export default function Complaints(){
                     fixedHeaderContent={() => (
                         <TableRow>
                             <TableCell className = {styles.tbHead}>S-NO</TableCell>
-                            <TableCell className = {styles.tbHead}>Complaint</TableCell>
+                            <TableCell className = {styles.tbHead}>Grievances</TableCell>
                             <TableCell className = {styles.tbHead}>Date of Submission</TableCell>
                             <TableCell className = {styles.tbHead}>Made By</TableCell>
                         </TableRow>
