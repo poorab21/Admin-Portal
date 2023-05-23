@@ -43,6 +43,13 @@
     margin-right: auto;
 }
 
+.spinnerContainer {
+    width: fit-content;
+    position: absolute;
+    top : 45%;
+    left: 50%;
+}
+
 @media (min-width : 0px) and (max-width : 599.5px) {
     .pie {
         margin-top: 30px;
