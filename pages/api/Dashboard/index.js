@@ -5,7 +5,7 @@ let endOfMonth = moment().endOf('month').toDate()
 let startOfMonth = moment().startOf('month').toDate()
 
 const isNew = (registration_date) => {
-    if(moment(registration_date).isBefore(endOfMonth) && moment(registration_date).isAfter(startOfMonth)){
+    if(moment(registration_date).isBefore(endOfMonth) && moment(registration_date).isSameOrAfter(startOfMonth)){
         return true
     }
     return false
