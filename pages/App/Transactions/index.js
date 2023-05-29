@@ -30,9 +30,7 @@ export default function Transactions(){
         }) : await axios.get(args)
         if(response.data.success) return response.data.transactions
     }
-    const { data , isLoading } = useSWR(`http://localhost:3000/api/Transactions/${type}/${status}`,fetcher,status === 'Completed' ? {
-        refreshInterval : 500
-    } : null)
+    const { data , isLoading , mutate } = useSWR(`http://localhost:3000/api/Transactions/${type}/${status}`,fetcher)
     const getID = (value,index) => {
         if(status === 'Requested') return index + 1;
         else if(status === 'Completed') return value.transaction_id;
@@ -46,6 +44,7 @@ export default function Transactions(){
     
     useEffect(()=>{
         hasCookieExpired()
+        mutate()
     },[type,status,date])
 
     if(isLoading) return (
