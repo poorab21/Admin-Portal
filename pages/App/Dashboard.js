@@ -25,7 +25,7 @@ export default function Dashboard(){
     }
 
     const { isLoading , data } = useSWR('Dashboard',fetcher,{
-        refreshInterval : 60000
+        revalidateOnFocus : true
     })
     
     if(isLoading) return (

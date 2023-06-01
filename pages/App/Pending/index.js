@@ -21,7 +21,9 @@ export default function Pending(){
         if(response.data.success) return response.data.pendings
     }
 
-    const { data , isLoading , mutate } = useSWR('http://localhost:3000/api/Pending',fetcher)
+    const { data , isLoading , mutate } = useSWR('http://localhost:3000/api/Pending',fetcher,{
+        revalidateOnFocus : true
+    })
 
     const getPendingTime = (date) => {
         const currentDate = new Date()

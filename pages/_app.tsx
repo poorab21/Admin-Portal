@@ -9,8 +9,8 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from './theme';
-import createEmotionCache from './createEmotionCache';
+import theme from '../Component/theme';
+import createEmotionCache from '../Component/createEmotionCache';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

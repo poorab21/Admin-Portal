@@ -10,7 +10,7 @@ import { useMutation } from "react-query";
 import { Avatar, Grid, Stack, Typography } from "@mui/material";
 import FieldData from "../../../../Component/FieldData";
 
-export default function servicemen(){
+export default function Servicemen(){
     const router = useRouter()
     const [showPic,setShowPic] = useState(false)
 

@@ -21,7 +21,7 @@ import {
     Typography , 
     Button } from "@mui/material"
 
-export default function serviceType({ params }){
+export default function ServiceType({ params }){
     const [modal,setModal] = useState(false)
     const [task,setTask] = useState('')
     const [hourly,setHourly] = useState(100)

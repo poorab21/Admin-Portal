@@ -15,7 +15,8 @@ const getServicemenCount = async (collection) => {
     const result = await collection.find({}).project({ 
         serviceType : true , 
         registration_date : true, 
-        _id : false 
+        _id : false ,
+        registered : true
     }).toArray()
     let cleaners = 0;
     let maids = 0;
@@ -26,20 +27,30 @@ const getServicemenCount = async (collection) => {
     if(!result.length) return null;
 
     for(let i = 0 ; i < result.length ; i++ ){
-        if(result[i].serviceType === 'Cleaner') { cleaners++ ; isNew(result[i].registration_date) ? newServicemen++ : null }
-        else if(result[i].serviceType === 'Maid') { maids++ ; isNew(result[i].registration_date) ? newServicemen++ : null }
-        else if(result[i].serviceType === 'Electrician') { electricians++ ; isNew(result[i].registration_date) ? newServicemen++ : null }
-        else if(result[i].serviceType === 'Gardener') { gardeners++ ; isNew(result[i].registration_date) ? newServicemen++ : null }
+        if(result[i].serviceType === 'Cleaner' && result[i].registered){ 
+            cleaners++ ; isNew(result[i].registration_date) ? newServicemen++ : null 
+        }
+        else if(result[i].serviceType === 'Maid' && result[i].registered) { 
+            maids++ ; isNew(result[i].registration_date) ? newServicemen++ : null 
+        }
+        else if(result[i].serviceType === 'Electrician' && result[i].registered) { 
+            electricians++ ; isNew(result[i].registration_date) ? newServicemen++ : null 
+        }
+        else if(result[i].serviceType === 'Gardener' && result[i].registered) { 
+            gardeners++ ; isNew(result[i].registration_date) ? newServicemen++ : null 
+        }
     }
     return { cleaners , maids , electricians , gardeners , newServicemen }
 }
 
 const getSeekerCount = async (collection) => {
-    const result = await collection.find({}).project({ registration_date : true }).toArray()
+    const result = await collection.find({}).project({ registration_date : true , registered : true }).toArray()
     let newSeekers = 0;
     if(!result.length) return null
     
-    for(let i = 0 ; i < result.length ; i++ ){ isNew(result[i].registration_date) ? newSeekers++ : null }
+    for(let i = 0 ; i < result.length ; i++ ){ 
+        isNew(result[i].registration_date) && result[i].registered ? newSeekers++ : null 
+    }
 
     return { newSeekers , totalSeekers : result.length }
 }

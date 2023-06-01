@@ -22,7 +22,9 @@ export default function Users(){
         if(response.data.success) return response.data.data
     }
 
-    const { data , isLoading , mutate } = useSWR(`http://localhost:3000/api/${userType}`,fetcher)
+    const { data , isLoading , mutate } = useSWR(`http://localhost:3000/api/${userType}`,fetcher,{
+        revalidateOnFocus : true
+    })
     
     const getDate = (value) => {
         const date = new Date(value)

@@ -24,10 +24,6 @@ export default function Login(){
         else setError(true)
     }
 
-    useEffect(()=>{
-        router.prefetch('/App/Dashboard')
-    },[])
-
     return (
         <>
             <Head>

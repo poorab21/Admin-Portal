@@ -30,7 +30,9 @@ export default function Transactions(){
         }) : await axios.get(args)
         if(response.data.success) return response.data.transactions
     }
-    const { data , isLoading , mutate } = useSWR(`http://localhost:3000/api/Transactions/${type}/${status}`,fetcher)
+    const { data , isLoading , mutate } = useSWR(`http://localhost:3000/api/Transactions/${type}/${status}`,fetcher,{
+        revalidateOnFocus : true
+    })
     const getID = (value,index) => {
         if(status === 'Requested') return index + 1;
         else if(status === 'Completed') return value.transaction_id;
