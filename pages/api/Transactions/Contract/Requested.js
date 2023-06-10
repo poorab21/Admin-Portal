@@ -9,7 +9,9 @@ export default async function Requested(req,res){
             { $match : {
                 $and : [
                     {
-                        InProgress : false ,
+                        InProgress : false 
+                    },
+                    {
                         completed : false ,
                     }
                 ]

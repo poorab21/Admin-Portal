@@ -15,7 +15,6 @@ export default async function Submitted(req,res){
         },{
             upsert : false
         })
-        console.log(result)
         result.value ? res.json({
             success : true
         }) : res.json({
