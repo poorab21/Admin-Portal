@@ -110,7 +110,7 @@ export default function Login(){
     return (
         <>
             <Head>
-                <title>Sign In (Maid-In)</title>
+                <title>Sign In | Maid-In</title>
             </Head>
             <div className = {styles.login}>
                 <div className = {styles.imgContainer}>
@@ -182,7 +182,7 @@ export default function Login(){
             </div>
             <Modal
             open = {modal}
-            onClose={() => setModal(false)}
+            onClose={onCloseModal}
             style = {{ 
                 width : 'fit-content' , 
                 height : 'fit-content' , 

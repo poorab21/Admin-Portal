@@ -5,6 +5,7 @@ import FieldData from "../../../../../Component/FieldData"
 import clsx from "clsx"
 import React from "react"
 import { Grid, Table , Stack, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import Head from "next/head"
 
 
 export default function Transaction(){
@@ -59,6 +60,11 @@ export default function Transaction(){
     const month = ['January','February','March','April','May','June','July','August','September','October','November','December']
     return (
         <>
+            <Head>
+                <title>
+                    { `${_id} | Maid In` }
+                </title>
+            </Head>
             <Layout>
                 <React.Fragment>
                     <Stack

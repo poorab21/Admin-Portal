@@ -15,6 +15,7 @@ import {
     Stack , 
     Grid
 } from "@mui/material"
+import Head from "next/head"
 
 export default function Transaction(){
     const router = useRouter()
@@ -66,6 +67,11 @@ export default function Transaction(){
     const month = ['January','February','March','April','May','June','July','August','September','October','November','December']
     return (
         <>
+            <Head>
+                <title>
+                    {`One-Off Request ${router.query.transaction} | Maid In`}
+                </title>
+            </Head>
             <Layout>
                 <React.Fragment>
                     <Stack

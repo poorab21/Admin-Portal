@@ -12,6 +12,7 @@ import { checkCookie } from '../../../Component/checkCookie'
 import React from 'react'
 import { MenuItem, Select, Stack, TableCell, TableRow, Typography , Button } from '@mui/material'
 import { TableVirtuoso } from 'react-virtuoso'
+import Head from 'next/head'
 
 export default function Users(){
     const [userType,setUserType] = useState('Servicemen')
@@ -57,93 +58,98 @@ export default function Users(){
     )
 
     return (
-        <Layout>
-            <React.Fragment>
-                <Stack
-                direction={'column'}
-                spacing = {2}
-                className = {styles.container}
-                >
+        <React.Fragment>
+            <Head>
+                <title>Users | Maid In</title>
+            </Head>
+            <Layout>
+                <React.Fragment>
                     <Stack
-                    direction={'row'}
-                    className = {styles.header}
+                    direction={'column'}
+                    spacing = {2}
+                    className = {styles.container}
                     >
-                        <Typography className = {styles.heading}>
-                            { userType }
-                        </Typography>
-                        <Select value={userType} className = {styles.filter} onChange={(e) => setUserType(e.target.value) }>
-                            <MenuItem value = {'Servicemen'}>Servicemen</MenuItem>
-                            <MenuItem value = {'Seeker'}>Seeker</MenuItem>
-                        </Select>
-                    </Stack>
-                    <TableVirtuoso
-                    data={data}
-                    fixedHeaderContent={() => (
-                        <TableRow>
-                            <TableCell className = {styles.tbHead}>
-                                ID
-                            </TableCell>
-                            <TableCell className = {styles.tbHead}>
-                                Name
-                            </TableCell>
-                            <TableCell className = {styles.tbHead}>
-                                Profile
-                            </TableCell>
-                            <TableCell className = {styles.tbHead}>
-                                Status
-                            </TableCell>
-                        </TableRow>
-                    )}
-                    itemContent={(index,value) => (
-                        <>
-                            <TableCell className = {styles.tbData}>{value._id}</TableCell>
-                            <TableCell className = {styles.tbData}>{`${value.firstname} ${value.lastname}`}</TableCell>
-                            <TableCell className = {styles.tbData}>
-                                <center>
-                                    {
-                                        userType === 'Servicemen' ?
-                                            <Link href={{
-                                            pathname : `Users/Servicemen/${value._id}` ,
-                                            query : {
-                                            id : value._id ,
-                                            firstname : value.firstname ,
-                                            lastname : value.lastname ,
-                                            cnic : value.cnic ,
-                                            experience : value.experience ,
-                                            contact : value.contact ,
-                                            email : value.email ,
-                                            serviceType : value.serviceType ,
-                                            registration_date : `${getDate(value.registration_date)}`
-                                            }
-                                            }}>
-                                                <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={20}/>
-                                            </Link> : <Link href={{
-                                                pathname : `Users/Seeker/${value._id}` ,
+                        <Stack
+                        direction={'row'}
+                        className = {styles.header}
+                        >
+                            <Typography className = {styles.heading}>
+                                { userType }
+                            </Typography>
+                            <Select value={userType} className = {styles.filter} onChange={(e) => setUserType(e.target.value) }>
+                                <MenuItem value = {'Servicemen'}>Servicemen</MenuItem>
+                                <MenuItem value = {'Seeker'}>Seeker</MenuItem>
+                            </Select>
+                        </Stack>
+                        <TableVirtuoso
+                        data={data}
+                        fixedHeaderContent={() => (
+                            <TableRow>
+                                <TableCell className = {styles.tbHead}>
+                                    ID
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}>
+                                    Name
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}>
+                                    Profile
+                                </TableCell>
+                                <TableCell className = {styles.tbHead}>
+                                    Status
+                                </TableCell>
+                            </TableRow>
+                        )}
+                        itemContent={(index,value) => (
+                            <>
+                                <TableCell className = {styles.tbData}>{value._id}</TableCell>
+                                <TableCell className = {styles.tbData}>{`${value.firstname} ${value.lastname}`}</TableCell>
+                                <TableCell className = {styles.tbData}>
+                                    <center>
+                                        {
+                                            userType === 'Servicemen' ?
+                                                <Link href={{
+                                                pathname : `Users/Servicemen/${value._id}` ,
                                                 query : {
-                                                    id : value._id ,
-                                                    firstname : value.firstname ,
-                                                    lastname : value.lastname ,
-                                                    contact : value.contact ,
-                                                    email : value.email ,
-                                                    occupation : value.occupation ,
-                                                    registration_date : `${getDate(value.registration_date)}`
-                                                    }
+                                                id : value._id ,
+                                                firstname : value.firstname ,
+                                                lastname : value.lastname ,
+                                                cnic : value.cnic ,
+                                                experience : value.experience ,
+                                                contact : value.contact ,
+                                                email : value.email ,
+                                                serviceType : value.serviceType ,
+                                                registration_date : `${getDate(value.registration_date)}`
+                                                }
                                                 }}>
-                                                <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={20}/>
-                                        </Link>
-                                    }
-                                </center>
-                            </TableCell>
-                            <TableCell  className = {styles.tbData}>
-                                <Button className = {styles.userbtn} onClick = {() => changeStatus(value._id,!value.blocked)}>
-                                    { value.blocked ? 'UnBlock' : 'Block' }
-                                </Button>
-                            </TableCell>
-                        </>
-                    )}
-                    />
-                </Stack>
-            </React.Fragment>        
-        </Layout>
+                                                    <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={20}/>
+                                                </Link> : <Link href={{
+                                                    pathname : `Users/Seeker/${value._id}` ,
+                                                    query : {
+                                                        id : value._id ,
+                                                        firstname : value.firstname ,
+                                                        lastname : value.lastname ,
+                                                        contact : value.contact ,
+                                                        email : value.email ,
+                                                        occupation : value.occupation ,
+                                                        registration_date : `${getDate(value.registration_date)}`
+                                                        }
+                                                    }}>
+                                                    <AiFillInfoCircle style = {{ cursor : 'pointer' }} size={20}/>
+                                            </Link>
+                                        }
+                                    </center>
+                                </TableCell>
+                                <TableCell  className = {styles.tbData}>
+                                    <Button className = {styles.userbtn} onClick = {() => changeStatus(value._id,!value.blocked)}>
+                                        { value.blocked ? 'UnBlock' : 'Block' }
+                                    </Button>
+                                </TableCell>
+                            </>
+                        )}
+                        />
+                    </Stack>
+                </React.Fragment>        
+            </Layout>
+        </React.Fragment>
     )
 }

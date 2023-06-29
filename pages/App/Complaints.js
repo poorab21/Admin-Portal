@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { MenuItem, Select, Stack, TableCell, TableRow, Typography } from '@mui/material'
 import { TableVirtuoso } from 'react-virtuoso'
+import Head from 'next/head'
 
 export default function Complaints(){
     const [userType,setUserType] = useState('Servicemen')
@@ -41,6 +42,9 @@ export default function Complaints(){
 
     return (
         <React.Fragment>
+            <Head>
+                <title>Grievances | Maid In</title>
+            </Head>
             <Layout>
                 <Stack  
                 direction={'column'} 

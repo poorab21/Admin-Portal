@@ -6,6 +6,7 @@ import clsx from "clsx"
 import moment from 'moment/moment'
 import React from 'react'
 import { Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import Head from "next/head"
 
 export default function Transaction(){
     const router = useRouter()
@@ -60,6 +61,11 @@ export default function Transaction(){
 
     return (
         <>
+            <Head>
+                <title>
+                    { `${_id} | Maid In` }
+                </title>
+            </Head>
             <Layout>
                 <React.Fragment>
                     <Stack

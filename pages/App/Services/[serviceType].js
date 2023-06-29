@@ -20,6 +20,7 @@ import {
     TableRow, 
     Typography , 
     Button } from "@mui/material"
+import Head from "next/head"
 
 export default function ServiceType({ params }){
     const [modal,setModal] = useState(false)
@@ -80,7 +81,12 @@ export default function ServiceType({ params }){
         </div>
     )
     return (
-        <>  
+        <>
+            <Head>
+                <title>
+                    { `${serviceType} | Maid In`}
+                </title>
+            </Head>  
             <Layout>
                 <Stack
                 direction = {'column'}

@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import React from 'react'
 import { Button, Stack, TableCell, TableRow, Typography } from "@mui/material";
 import { TableVirtuoso } from "react-virtuoso";
+import Head from 'next/head'
 
 export default function Pending(){
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -71,6 +72,11 @@ export default function Pending(){
 
     return (
         <>
+            <Head>
+                <title>
+                    Pending Applicants | Maid In
+                </title>
+            </Head>
             <Layout>
                 <React.Fragment>
                     <Stack

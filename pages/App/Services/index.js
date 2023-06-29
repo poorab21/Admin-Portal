@@ -1,10 +1,16 @@
 import Layout from '../../../Component/Layout'
 import styles from '../../../styles/Services.module.css'
 import ServiceBox from '../../../Component/ServiceBox'
+import Head from 'next/head'
 
 export default function Services(){
     return (
         <>
+            <Head>
+                <title>
+                    Services | Maid In
+                </title>
+            </Head>
             <Layout>
                 <div className = {styles.container}>
                     <div className = {styles.images}>

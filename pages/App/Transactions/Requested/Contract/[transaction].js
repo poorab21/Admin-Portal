@@ -16,6 +16,7 @@ import {
     TableContainer
 } from "@mui/material"
 import React from "react"
+import Head from "next/head"
 
 export default function Transaction(){
     const router = useRouter()
@@ -69,6 +70,11 @@ export default function Transaction(){
 
     return (
         <>
+            <Head>
+                <title>
+                    {`Contract Request ${router.query.transaction} | Maid In`}
+                </title>
+            </Head>
             <Layout>
                 <React.Fragment>
                 <Stack
@@ -127,48 +133,3 @@ export default function Transaction(){
         </>
     )
 }
-
-{/* <div className = {styles.container}>
-                <div className = {styles.header}>
-                    <p className = {styles.transactionID}>{`Contract Request #${router.query.transaction}`}</p>
-                </div>
-                <div className = {styles.info}>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Contract Duration'} value = {`${
-                            (new Date(start_date)).getDate()} ${month[(new Date(start_date)).getMonth()]} ${
-                                (new Date(start_date)).getFullYear()} - ${endDate.getDate()} ${
-                                    month[endDate.getMonth()]
-                                } ${ endDate.getFullYear() }`} />
-                        <FieldData field = {'Work Hours'} value = {`${start_hour} - ${end_hours}`} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Montly Wage'} value = {`${montly_wage} PKR`} />
-                        <FieldData field = {'Service Type'} value = {serviceType} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Customer'} value = {customer} />
-                        <FieldData field = {'Serviceman'} value = {'Not Assigned yet'} />
-                    </div>
-                    <div className = {styles.row}>
-                        <FieldData field = {'Service Location'} value = {location} /> 
-                    </div>
-                    <table className = {styles.conditionList}>
-                        <tbody>
-                            <tr>
-                                <th className = {styles.tbHead}>
-                                    S.NO
-                                </th>
-                                <th className = {styles.tbHead}>
-                                    Condition
-                                </th>
-                                <th className = {styles.tbHead}>
-                                    Priority
-                                </th>
-                            </tr>
-                            {
-                                TOC && Conditions(JSON.parse(TOC))
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div> */}
