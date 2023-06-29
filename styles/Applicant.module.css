@@ -32,6 +32,7 @@
 
 .refInfo {
     flex: 3;
+    align-self: center;
 }
 
 .reference {

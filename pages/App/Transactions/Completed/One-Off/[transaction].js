@@ -11,6 +11,16 @@ export default function Completed(){
     const ended = new Date(router.query.ended)
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     let ratings = router?.query?.Ratings ? JSON.parse(router.query.Ratings) : '0' 
+    
+    const oneOffTime = (duration) => {
+        let hour = 0;
+        while(duration >= 60){
+            hour++;
+            duration -= 60;
+        }
+        if(duration > 0) return `${hour} ${hour > 1 ? 'Hours' : 'Hour' } ${duration} ${duration === 1 ? 'Minute' : 'Minutes'}`;
+        else return `${hour} ${hour > 1 ? 'Hours' : 'Hour' }`;
+    }
 
     return (
         <Layout>
@@ -46,7 +56,7 @@ export default function Completed(){
                         <FieldData field = {'Monthly Wage'} value = {`${router.query.generated_Amount} PKR`} />
                     </Grid>
                     <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
-                        <FieldData field = {'Duration'} value = {`${router.query.Duration} Month/s`} />
+                        <FieldData field = {'Duration'} value = {oneOffTime(Number(router.query.Duration))} />
                     </Grid>
                     <Grid lg = {3} md = {3} sm = {6} xs = {12} item>
                         <FieldData field = {'Payment Method'} value = {router.query.paymentMethod} />

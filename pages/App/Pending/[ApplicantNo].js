@@ -35,7 +35,7 @@ export default function Applicant(){
     useEffect(()=>{
          router.isReady ?  mutate({ servicemenID : router.query.id }) : null
     },[router.isReady])
-
+    
     return (
         <Layout>
             <React.Fragment>
@@ -116,9 +116,6 @@ export default function Applicant(){
                                             <div className = {styles.refInfo}>
                                                 <p style = {{ fontWeight : 'bold' , fontStyle : 'italic' , textAlign : 'center' , fontSize : '12px'}}>
                                                     {value.name}
-                                                </p>
-                                                <p style = {{ fontWeight : 'bold' , fontStyle : 'italic' , textAlign : 'center' , fontSize : '12px'}}>
-                                                    {value.occupation}
                                                 </p>
                                                 <p style = {{ fontWeight : 'bold' , fontStyle : 'italic' , textAlign : 'center' , fontSize : '12px'}}>
                                                     {value.contact}
