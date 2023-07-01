@@ -8,14 +8,17 @@ import moment from 'moment/moment'
 import { Atom } from "react-loading-indicators"
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from 'react'
-import { Button, Stack, TableCell, TableRow, Typography } from "@mui/material";
+import React, { useState } from 'react'
+import { Button, Stack, TableCell, TableRow, TextField, Typography , InputAdornment, Divider } from "@mui/material";
 import { TableVirtuoso } from "react-virtuoso";
 import Head from 'next/head'
+import { AiFillFilter } from 'react-icons/ai'
+import clsx from "clsx";
 
 export default function Pending(){
     const Months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     const router = useRouter()
+    const [filterValue,setFilterValue] = useState('')
 
     const fetcher = async (...args) => {
         const response = await axios.get(args)
@@ -64,6 +67,14 @@ export default function Pending(){
         else if(!response.data.success && !response.data.tokenExpired) console.log('Error in Rejection')
     }
 
+    const filteredData = (data) => {
+        const filtered_Result = data.filter((value)=>{
+            const fullname = value.firstname + ' ' + value.lastname
+            return fullname.includes(filterValue)    
+        })
+        return filtered_Result;
+    }
+
     if(isLoading) return (
         <div className = {styles.spinnerContainer}>
             <Atom size = {'small'} color={'cornflowerblue'}  />
@@ -87,8 +98,23 @@ export default function Pending(){
                         <Typography className = {styles.heading}>
                             Pending Applications
                         </Typography>
+                        <Divider/>
+                        <TextField
+                        type={'text'}
+                        value={filterValue}
+                        onChange={(e) => setFilterValue(e.target.value)}
+                        style={{ alignSelf : 'center' }}
+                        placeholder = {'Search by Name'}
+                        InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <AiFillFilter size={20} color = {'black'}/>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
                         <TableVirtuoso
-                        data={data}
+                        data={ filterValue.length > 0 ? filteredData(data) : data }
                         fixedHeaderContent={() => (
                             <TableRow>
                                 <TableCell className = {styles.tbHead}>S-NO</TableCell>
@@ -103,7 +129,10 @@ export default function Pending(){
                             <>
                                 <TableCell className = {styles.tbData}>{ index + 1 }</TableCell>
                                 <TableCell className = {styles.tbData}>{`${applicant.firstname} ${applicant.lastname}`}</TableCell>
-                                <TableCell className = {styles.tbData}>
+                                <TableCell className = {clsx({
+                                    [styles.overdue] : getPendingTime(applicant.registration_date) >= 7 ,
+                                    [styles.hasTime] : getPendingTime(applicant.registration_date) < 7
+                                })}>
                                     {
                                         `${getPendingTime(applicant.registration_date)} day/s ago`
                                     }
@@ -134,7 +163,7 @@ export default function Pending(){
                                 <TableCell className = {styles.tbData}>
                                 {
                                     applicant.credentials ? 
-                                    <Typography>Submitted</Typography> 
+                                    <Typography className = {styles.submitText} style={{ fontFamily : 'fantasy' }}>Submitted</Typography> 
                                     :
                                     <center>
                                         <Button className = {styles.submittedBtn} onClick = {() => submitted(applicant._id)}>

@@ -8,7 +8,17 @@
     text-align: center;
     font-weight: bolder;
     font-style: italic;
-    font-size: x-large;
+    font-size: medium;
+}
+
+.overdue {
+    background-color: red;
+    color : white;
+}
+
+.hasTime {
+    background-color: white;
+    color: black;
 }
 
 .submittedBtn {
@@ -25,11 +35,31 @@
     font-style: italic;
     font-weight: bolder;
     text-align: center;
+    font-size: small;
     width: 20%;
 }
 
 .tbData {
     text-align: center;
+    font-size: x-small;
+}
+
+.overdue {
+    text-align: center;
+    background-color: red;
+    font-size: x-small;
+    color: white;
+}
+
+.hasTime {
+    text-align: center;
+    background-color: white;
+    font-size: x-small;
+    color: black;
+}
+
+.submitText {
+    font-size : x-small
 }
 
 .submittedBtn:hover {
@@ -42,4 +72,52 @@
     position: absolute;
     top : 45%;
     left: 50%;
+}
+
+@media screen and (min-width : 320px) {
+    .submitText {
+        font-size : x-small
+    }
+    .hasTime {
+        font-size: x-small;
+    }
+    .overdue {
+        font-size: x-small;
+    }
+    .tbData {
+        font-size: x-small;
+    }
+    .tbHead {
+        font-size: small;
+    }
+    .submittedBtn {
+        font-size: x-small;
+    }
+    .heading {
+        font-size: medium;
+    }
+}
+
+@media screen and (min-width : 500px) {
+    .submitText {
+        font-size : small
+    }
+    .hasTime {
+        font-size: small;
+    }
+    .overdue {
+        font-size: small;
+    }
+    .tbData {
+        font-size: small;
+    }
+    .tbHead {
+        font-size: medium;
+    }
+    .submittedBtn {
+        font-size: small;
+    }
+    .heading {
+        font-size: large;
+    }
 }

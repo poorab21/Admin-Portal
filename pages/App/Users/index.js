@@ -10,12 +10,14 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { checkCookie } from '../../../Component/checkCookie'
 import React from 'react'
-import { MenuItem, Select, Stack, TableCell, TableRow, Typography , Button } from '@mui/material'
+import { MenuItem, Select, Stack, TableCell, TableRow, Typography , Button, TextField , InputAdornment } from '@mui/material'
 import { TableVirtuoso } from 'react-virtuoso'
 import Head from 'next/head'
+import { AiFillFilter } from 'react-icons/ai'
 
 export default function Users(){
     const [userType,setUserType] = useState('Servicemen')
+    const [filterValue,setFilterValue] = useState('')
     const router = useRouter()
 
     const fetcher = async (...args) => {
@@ -45,6 +47,14 @@ export default function Users(){
     const hasCookieExpired = async () =>{
         const result = await checkCookie()
         result ? null : router.push('/')
+    }
+    
+    const filteredData = (data) => {
+        const filtered_Result = data.filter((value)=>{
+            const fullname = value.firstname + ' ' + value.lastname
+            return fullname.includes(filterValue)
+        })
+        return filtered_Result;
     }
     
     useEffect(()=>{
@@ -81,8 +91,22 @@ export default function Users(){
                                 <MenuItem value = {'Seeker'}>Seeker</MenuItem>
                             </Select>
                         </Stack>
+                        <TextField
+                        type={'text'}
+                        value={filterValue}
+                        onChange={ (e) => setFilterValue(e.target.value) }
+                        style={{ alignSelf : 'center' }}
+                        placeholder = {'Search by Name'}
+                        InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <AiFillFilter size={20} color = {'black'}/>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
                         <TableVirtuoso
-                        data={data}
+                        data={ filterValue.length > 0 ? filteredData(data)  : data }
                         fixedHeaderContent={() => (
                             <TableRow>
                                 <TableCell className = {styles.tbHead}>

@@ -8,13 +8,15 @@ import { useEffect } from 'react'
 import { checkCookie } from '../../Component/checkCookie'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { MenuItem, Select, Stack, TableCell, TableRow, Typography } from '@mui/material'
+import { MenuItem, Select, Stack, TableCell, TableRow, Typography , TextField , InputAdornment } from '@mui/material'
 import { TableVirtuoso } from 'react-virtuoso'
 import Head from 'next/head'
+import { AiFillFilter } from 'react-icons/ai'
 
 export default function Complaints(){
     const [userType,setUserType] = useState('Servicemen')
-    const router = useRouter()
+    const router = useRouter()    
+    const [filterValue,setFilterValue] = useState('')
 
     const fetcher = async () => {
         const response = await axios.get(`http://localhost:3000/api/grievances/${userType}`)
@@ -24,10 +26,18 @@ export default function Complaints(){
     const { data , isLoading } = useSWR(`http://localhost:3000/api/grievances/${userType}`,fetcher,{
         revalidateOnFocus : true
     })
-
+    
     const hasCookieExpired = async () =>{
         const result = await checkCookie()
         result ? null : router.push('/')
+    }
+
+    const filteredData = (data) => {
+        const filtered_Result = data.filter((value)=>{
+            const fullname = value.customer[0].firstname + ' ' + value.customer[0].lastname
+            return fullname.includes(filterValue)
+        })
+        return filtered_Result;
     }
             
     useEffect(()=>{
@@ -53,21 +63,38 @@ export default function Complaints(){
                     <Stack direction={'row'} className = {styles.header}>
                         <Typography className = {styles.heading}>Grievances</Typography>
                         <Select 
-                        className = {styles.filter} 
-                        label = {'User Type'} 
+                        className = {styles.filter}
                         value={userType} 
                         onChange={(e)=> setUserType(e.target.value)}>
                             <MenuItem value = {'Servicemen'}>Servicemen</MenuItem>
                             <MenuItem value = {'Seeker'}>Seeker</MenuItem>
                         </Select>
                     </Stack>
+                    <TextField
+                    type={'text'}
+                    value={filterValue}
+                    onChange={ (e) => setFilterValue(e.target.value) }
+                    style={{ alignSelf : 'center' }}
+                        placeholder = {'Search by Name'}
+                        InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <AiFillFilter size={20} color = {'black'}/>
+                              </InputAdornment>
+                            ),
+                          }}
+                    />
                     <TableVirtuoso 
                     className={styles.table}
-                    data = {data}
+                    data = { filterValue.length > 0 ? filteredData(data) : data }
                     itemContent={(index,complaint) => (
                         <>
                             <TableCell className = {styles.row}>{ index + 1 }</TableCell>
-                            <TableCell className = {styles.row}>{ complaint.email }</TableCell>
+                            <TableCell className = {styles.row}>
+                                { 
+                                    userType === 'Servicemen' ? complaint.email : complaint.message
+                                }
+                            </TableCell>
                             <TableCell className = {styles.row}>
                             {
                                 (new Date(complaint.submission)).getDate() + '/' +
@@ -76,7 +103,7 @@ export default function Complaints(){
                             }
                             </TableCell>
                             <TableCell className = {styles.row}>
-                                {complaint.person}
+                                {`${complaint.customer[0].firstname} ${complaint.customer[0].lastname}`}
                             </TableCell>
                         </>
                     )}
