@@ -130,8 +130,8 @@ export default function Pending(){
                                 <TableCell className = {styles.tbData}>{ index + 1 }</TableCell>
                                 <TableCell className = {styles.tbData}>{`${applicant.firstname} ${applicant.lastname}`}</TableCell>
                                 <TableCell className = {clsx({
-                                    [styles.overdue] : getPendingTime(applicant.registration_date) >= 7 ,
-                                    [styles.hasTime] : getPendingTime(applicant.registration_date) < 7
+                                    [styles.overdue] : getPendingTime(applicant.registration_date) >= 7 && !applicant.credentials ,
+                                    [styles.hasTime] : getPendingTime(applicant.registration_date) < 7 || applicant.credentials
                                 })}>
                                     {
                                         `${getPendingTime(applicant.registration_date)} day/s ago`
