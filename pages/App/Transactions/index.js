@@ -72,13 +72,15 @@ export default function Transactions(){
                     direction={'row'}
                     className = {styles.header}
                     >
-                        <Select value={status} onChange={(e) => { setStatus(e.target.value) ; }}>
+                        <Select className = {styles.filterText} value={status} onChange={(e) => { setStatus(e.target.value) ; }}>
                             <MenuItem value = {'In-Progress'}>In-Progress</MenuItem>
                             <MenuItem value = {'Requested'}>Requested</MenuItem>
                             <MenuItem value = {'Completed'}>Completed</MenuItem>
+                            <MenuItem value = {'Scheduled'}>Scheduled</MenuItem>
+                            <MenuItem value = {'Cancelled'}>Cancelled</MenuItem>
                         </Select>
                         <Typography className = {styles.heading}>Transactions</Typography>
-                        <Select value={type} onChange={(e) => { setType(e.target.value) ; }}>
+                        <Select className = {styles.filterText} value={type} onChange={(e) => { setType(e.target.value) ; }}>
                             <MenuItem value = {'One-Off'}>One-Off</MenuItem>
                             <MenuItem value = {'Contract'}>Contract</MenuItem>
                         </Select>
@@ -91,7 +93,7 @@ export default function Transactions(){
                                 </span>
                                 <span 
                                 id = "date"
-                                style = {{ marginLeft : '10px' , fontWeight : 'bold' , fontStyle : 'italic' , fontSize : 'medium' }}>
+                                className = {styles.dateText}>
                                     {`${date.getDate()} ${Months[date.getMonth()]} ${date.getFullYear()}`}
                                 </span>
                             </div>

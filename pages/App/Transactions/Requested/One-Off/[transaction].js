@@ -106,7 +106,7 @@ export default function Transaction(){
                             <Grid lg = {4} md = {12} sm = {12} xs = {12} item>
                                 <FieldData 
                                 field = {'Service Location'} 
-                                value = {'House 109/1 Phase 7 Khy-e-rahat 6th Lane Defence Karachi'}/>
+                                value = {location}/>
                             </Grid>
                         </Grid>
                         <Stack

@@ -3,10 +3,10 @@ import styles from '../../../../../styles/OneOff.module.css'
 import Layout from "../../../../../Component/Layout"
 import FieldData from "../../../../../Component/FieldData"
 import clsx from "clsx"
-import React from "react"
-import { Grid, Table , Stack, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import React, { useState } from "react"
+import { Grid, Table , Stack, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Dialog, DialogTitle, DialogContent, DialogContentText } from "@mui/material"
 import Head from "next/head"
-
+import { GiCancel } from 'react-icons/gi'
 
 export default function Transaction(){
     const router = useRouter()
@@ -21,8 +21,10 @@ export default function Transaction(){
         start_date  ,
         start_time ,
         _id ,
-        TOC
+        TOC ,
+        cancellation_reason
     } = router.query
+    const [open,setOpen] = useState(false)
 
     const Conditions = (TOC) => {
         if(TOC.length > 0) {
@@ -76,7 +78,12 @@ export default function Transaction(){
                         direction={'row'}
                         className = {styles.header}
                         >
-                            <Typography className = {styles.heading}>{_id}</Typography>
+                            <Typography style = {{ fontWeight : 'bolder' , fontSize : 'larger' , flex : 1 , textAlign : 'center' }}>
+                                {_id}
+                            </Typography>
+                            <GiCancel 
+                            onClick={() => setOpen(true)}
+                            style={{ alignSelf : 'center' , cursor : 'pointer' }} size={20} color = {'black'}/>
                         </Stack>
                         <Grid justifyContent={'center'} alignItems={'center'} container>
                             <Grid lg = {2} md = {3} sm = {6} xs = {12} item>
@@ -158,7 +165,25 @@ export default function Transaction(){
                             </TableContainer>
                         </Stack>
                     </Stack>
-                </React.Fragment>                
+                    <Dialog open = {open} onClose={() => setOpen(false)}>
+                        <DialogTitle 
+                        style={{ color : 'black' , fontFamily : 'cursive' , fontWeight : 'bold' , textAlign : 'center' }}>
+                            Customer's reason for Cancellation
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText 
+                            style={{ 
+                                color : 'black' , 
+                                fontFamily : 'cursive' , 
+                                border : '5px solid black' ,
+                                padding : '10px' ,
+                                textAlign : 'center'
+                            }}>
+                                { cancellation_reason }
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog>
+                </React.Fragment>
             </Layout>
         </>
     )

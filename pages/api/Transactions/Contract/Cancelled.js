@@ -1,27 +1,21 @@
-import clientPromise from '../../../../lib/mongo/index'
+import clientPromise from "../../../../lib/mongo";
 
-export default async function InProgress(req,res){
+export default async function Cancelled(req,res){
     if(req.method === 'GET'){
         const client = await clientPromise;
-        const db = client.db('test')
-        const collection = db.collection('one-off transactions')
+        const db = client.db('test');
+        const collection = db.collection('contract-transactions')
         const result = await collection.aggregate([
-            { $match : {
-                $and : [
-                    {
-                        InProgress : true 
-                    },
-                    {
-                        completed : false ,
-                    },
-                    {
-                        cancelled : false 
-                    },
-                    {
-                        scheduled : false
-                    }
-                ]
-            }},
+            {
+                $match : {
+                    $and : [
+                        { cancelled : true } ,
+                        { scheduled : false } ,
+                        { completed : false } ,
+                        { InProgress : false }   
+                    ]
+                }
+            },
             { $lookup : {
                 from : 'Service_Provider' ,
                 localField : 'provider' ,

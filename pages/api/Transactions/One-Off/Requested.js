@@ -12,7 +12,13 @@ export default async function Requested(req,res){
                         InProgress : false 
                     },
                     {
-                        completed : false ,
+                        completed : false 
+                    },
+                    {
+                        cancelled : false 
+                    },
+                    {
+                        scheduled : false
                     }
                 ]
             }},

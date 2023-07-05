@@ -72,6 +72,10 @@
     text-align: center;
 }
 
+.filterText {
+    font-size: medium;
+}
+
 .tile {
     border : 2px solid black;
     background-color :blanchedalmond;
@@ -93,14 +97,87 @@
     text-align: center;
     font-weight: bolder;
     background-color: cornflowerblue;
+    font-size: large;
 }
 
 .tbData {
     text-align: center;
+    font-size: medium;
 }
 
 .viewBtn {
     border: 1px solid black;
     background-color: cornflowerblue;
-    color : black
+    color : black;
+    font-size: small;
+}
+
+.dateText { 
+    margin-left : 10px; 
+    font-weight : bold; 
+    font-style : italic;
+    font-size : medium 
+}
+
+@media screen and (min-width : 400px) {
+    .tbHead {
+        font-size: small;
+    }    
+    .tbData {
+        font-size: x-small;
+    }    
+    .heading {
+        font-size: medium;
+    }
+    .filterText {
+        font-size: x-small;
+    }
+    .dateText {
+        font-size: x-small;
+    }
+    .viewBtn {
+        font-size: xx-small;
+    }
+}
+
+@media screen and (min-width : 700px) {
+    .tbHead {
+        font-size: medium;
+    }    
+    .tbData {
+        font-size: small;
+    }    
+    .heading {
+        font-size: large;
+    }
+    .filterText {
+        font-size: small;
+    }
+    .dateText {
+        font-size: small;
+    }
+    .viewBtn {
+        font-size: x-small;
+    }
+}
+
+@media screen and (min-width : 900px) {
+    .tbHead {
+        font-size: large;
+    }    
+    .tbData {
+        font-size: medium;
+    }    
+    .heading {
+        font-size: x-large;
+    }
+    .filterText {
+        font-size: medium;
+    }
+    .dateText {
+        font-size: medium;
+    }
+    .viewBtn {
+        font-size: small;
+    }
 }

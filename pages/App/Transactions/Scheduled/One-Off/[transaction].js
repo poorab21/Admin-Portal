@@ -7,7 +7,6 @@ import React from "react"
 import { Grid, Table , Stack, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import Head from "next/head"
 
-
 export default function Transaction(){
     const router = useRouter()
     const { 
@@ -158,7 +157,7 @@ export default function Transaction(){
                             </TableContainer>
                         </Stack>
                     </Stack>
-                </React.Fragment>                
+                </React.Fragment>
             </Layout>
         </>
     )
