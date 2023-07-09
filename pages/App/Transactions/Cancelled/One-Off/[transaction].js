@@ -168,7 +168,7 @@ export default function Transaction(){
                     <Dialog open = {open} onClose={() => setOpen(false)}>
                         <DialogTitle 
                         style={{ color : 'black' , fontFamily : 'cursive' , fontWeight : 'bold' , textAlign : 'center' }}>
-                            Customer's reason for Cancellation
+                            Customer reason for Cancellation
                         </DialogTitle>
                         <DialogContent>
                             <DialogContentText 
